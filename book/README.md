@@ -17,8 +17,8 @@ All the methods of the classes you use every day, each with an example, and 10 e
 | F02 | [Array](en/foundations/02-array.md) | `int[]`, `Arrays`, `System.arraycopy` | ✅ |
 | F03 | [List](en/foundations/03-list.md) | `List`, `ArrayList`, `LinkedList`, `Iterator`, `Collections` | ✅ |
 | F04 | [Map](en/foundations/04-map.md) | `Map`, `HashMap`, `TreeMap`, `LinkedHashMap`, `Map.Entry` | ✅ |
-| F05 | Set | `Set`, `HashSet`, `TreeSet`, `LinkedHashSet` | ⏳ |
-| F06 | Stack and Queue | `Deque`, `ArrayDeque`, `PriorityQueue` | ⏳ |
+| F05 | [Set](en/foundations/05-set.md) | `Set`, `HashSet`, `TreeSet`, `LinkedHashSet` | ✅ |
+| F06 | [Stack and Queue](en/foundations/06-stack-queue.md) | `Deque`, `ArrayDeque`, `PriorityQueue`, `Stack` | ✅ |
 
 ## Part 1: Interview topics
 

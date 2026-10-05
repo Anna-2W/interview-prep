@@ -17,8 +17,8 @@ Toutes les méthodes des classes qu'on utilise tous les jours, chacune avec un e
 | F02 | [Array](fr/foundations/02-array.md) | `int[]`, `Arrays`, `System.arraycopy` | ✅ |
 | F03 | [List](fr/foundations/03-list.md) | `List`, `ArrayList`, `LinkedList`, `Iterator`, `Collections` | ✅ |
 | F04 | [Map](fr/foundations/04-map.md) | `Map`, `HashMap`, `TreeMap`, `LinkedHashMap`, `Map.Entry` | ✅ |
-| F05 | Set | `Set`, `HashSet`, `TreeSet`, `LinkedHashSet` | ⏳ |
-| F06 | Stack et Queue | `Deque`, `ArrayDeque`, `PriorityQueue` | ⏳ |
+| F05 | [Set](fr/foundations/05-set.md) | `Set`, `HashSet`, `TreeSet`, `LinkedHashSet` | ✅ |
+| F06 | [Stack et Queue](fr/foundations/06-stack-queue.md) | `Deque`, `ArrayDeque`, `PriorityQueue`, `Stack` | ✅ |
 
 ## Partie 1 : Les sujets d'entretien
 

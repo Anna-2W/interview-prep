@@ -27,7 +27,7 @@ and redo the problem 2 days later. A problem counts as "done" only when solved a
 ## Phase 0: Foundations and baseline (weeks 0 and 1)
 
 - [ ] Set up the repo and run `mvn test`
-- [ ] Part 0 foundations: [String](book/en/foundations/01-string.md), [Array](book/en/foundations/02-array.md), [List](book/en/foundations/03-list.md), [Map](book/en/foundations/04-map.md), all exercises green
+- [ ] Part 0 foundations: [String](book/en/foundations/01-string.md), [Array](book/en/foundations/02-array.md), [List](book/en/foundations/03-list.md), [Map](book/en/foundations/04-map.md), [Set](book/en/foundations/05-set.md), [Stack and Queue](book/en/foundations/06-stack-queue.md), all exercises green
 - [ ] Solve the warm-up `TwoSum`
 - [ ] Solve 3 easy problems timed, write down where you got stuck
 - [ ] Write your 1-minute "tell me about yourself" pitch (book chapter 14)

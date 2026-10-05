@@ -38,8 +38,8 @@ example, and 10 easy exercises per chapter.
 | F02 | Array · [EN](book/en/foundations/02-array.md) · [FR](book/fr/foundations/02-array.md) | [ArrayExercises.java](src/main/java/com/mastery/interview/foundations/ArrayExercises.java) | `mvn -Dtest=ArrayExercisesTest test` |
 | F03 | List · [EN](book/en/foundations/03-list.md) · [FR](book/fr/foundations/03-list.md) | [ListExercises.java](src/main/java/com/mastery/interview/foundations/ListExercises.java) | `mvn -Dtest=ListExercisesTest test` |
 | F04 | Map · [EN](book/en/foundations/04-map.md) · [FR](book/fr/foundations/04-map.md) | [MapExercises.java](src/main/java/com/mastery/interview/foundations/MapExercises.java) | `mvn -Dtest=MapExercisesTest test` |
-| F05 | Set | coming | |
-| F06 | Stack and Queue | coming | |
+| F05 | Set · [EN](book/en/foundations/05-set.md) · [FR](book/fr/foundations/05-set.md) | [SetExercises.java](src/main/java/com/mastery/interview/foundations/SetExercises.java) | `mvn -Dtest=SetExercisesTest test` |
+| F06 | Stack and Queue · [EN](book/en/foundations/06-stack-queue.md) · [FR](book/fr/foundations/06-stack-queue.md) | [StackQueueExercises.java](src/main/java/com/mastery/interview/foundations/StackQueueExercises.java) | `mvn -Dtest=StackQueueExercisesTest test` |
 
 Every chapter has the same sections:
 
