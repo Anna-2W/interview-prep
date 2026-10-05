@@ -26,7 +26,7 @@ All the methods of the classes you use every day, each with an example, and 10 e
 |---|---|---|---|
 | 00 | [How tech interviews work](en/00-how-interviews-work.md) | Interview loop, the 6-step method, levels and salary | ✅ |
 | 01 | [Complexity](en/01-complexity.md) | Big O, Omega, Theta, space complexity, amortized cost, recursion cost | ✅ |
-| 02 | Core data structures | Arrays, linked lists (all variants), stacks, queues, deques, hash tables, Bloom filters | ⏳ |
+| 02 | [Data structures by hand](en/02-data-structures-by-hand.md) | Dynamic array, linked lists (all variants), stack, queue, circular queue, hash table, Bloom filter | ✅ |
 | 03 | Trees and heaps | Binary trees, BST, AVL, red-black, B-trees, heaps, tries, radix trees | ⏳ |
 | 04 | Graphs | Representations, DFS, BFS, topological sort, shortest paths, MST, union-find | ⏳ |
 | 05 | Sorting and searching | All sorts with their trade-offs, binary search and its variants | ⏳ |

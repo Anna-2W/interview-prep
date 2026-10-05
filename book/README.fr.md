@@ -26,7 +26,7 @@ Toutes les méthodes des classes qu'on utilise tous les jours, chacune avec un e
 |---|---|---|---|
 | 00 | [Comment se passe un entretien tech](fr/00-how-interviews-work.md) | Les étapes, la méthode en 6 étapes, niveaux et salaire | ✅ |
 | 01 | [Complexité](fr/01-complexity.md) | Big O, Omega, Theta, complexité en espace, coût amorti, coût de la récursion | ✅ |
-| 02 | Structures de données de base | Tableaux, listes chaînées (toutes les variantes), piles, files, deques, tables de hachage, filtres de Bloom | ⏳ |
+| 02 | [Structures de données à la main](fr/02-data-structures-by-hand.md) | Tableau dynamique, listes chaînées (toutes les variantes), pile, file, file circulaire, table de hachage, filtre de Bloom | ✅ |
 | 03 | Arbres et tas | Arbres binaires, BST, AVL, rouge-noir, B-arbres, tas, tries, arbres radix | ⏳ |
 | 04 | Graphes | Représentations, DFS, BFS, tri topologique, plus courts chemins, arbre couvrant minimal, union-find | ⏳ |
 | 05 | Tri et recherche | Tous les tris et leurs compromis, recherche dichotomique et ses variantes | ⏳ |

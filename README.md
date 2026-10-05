@@ -46,7 +46,8 @@ example, and 10 easy exercises per chapter.
 | # | Chapter | Exercises | Run the tests |
 |---|---|---|---|
 | 01 | Complexity (Big O) · [EN](book/en/01-complexity.md) · [FR](book/fr/01-complexity.md) | [ComplexityQuiz.java](src/main/java/com/mastery/interview/complexity/ComplexityQuiz.java) · [FasterExercises.java](src/main/java/com/mastery/interview/complexity/FasterExercises.java) | `mvn -Dtest=ComplexityQuizTest test` · `mvn -Dtest=FasterExercisesTest test` |
-| 02 | Data structures coded by hand | coming | |
+| 02 | Data structures by hand · [EN](book/en/02-data-structures-by-hand.md) · [FR](book/fr/02-data-structures-by-hand.md) | [datastructures/](src/main/java/com/mastery/interview/datastructures/) (6 classes + `LinkedListProblems`) | `mvn -Dtest='My*Test,LinkedListProblemsTest' test` |
+| 03 | Coding patterns | coming | |
 
 The full list of chapters is in the [book table of contents](book/README.md).
 
