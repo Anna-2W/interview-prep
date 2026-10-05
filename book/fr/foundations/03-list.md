@@ -4,133 +4,216 @@
 
 ## 1. C'est quoi
 
-Une `List` est une collection **ordonnée** qui **peut grandir et rétrécir**. Comme un
-tableau, chaque élément a un indice qui commence à 0, et les doublons sont autorisés.
-Contrairement à un tableau, on peut ajouter et supprimer des éléments.
+Une `List` est une collection **ordonnée** qui **peut grandir et rétrécir**. L'indice
+commence à 0, les doublons sont autorisés.
 
-`List` est une **interface** (un contrat). On choisit une implémentation :
+`List` est une interface. Deux implémentations :
 
-| Implémentation | À l'intérieur | Quand l'utiliser |
+| Implémentation | À l'intérieur | Quand |
 |---|---|---|
-| `ArrayList` | Un tableau remplacé par un plus grand quand il est plein | **Presque toujours.** Le choix par défaut |
-| `LinkedList` | Des nœuds reliés au précédent et au suivant | Rarement. Pour les files, préférer `ArrayDeque` |
+| `ArrayList` | Un tableau, remplacé par un plus grand quand il est plein | **Presque toujours** |
+| `LinkedList` | Des nœuds reliés au précédent et au suivant | Rarement |
 
 ```java
-List<String> names = new ArrayList<>();   // on déclare avec l'interface, on crée avec la classe
+List<String> names = new ArrayList<>();
 ```
 
-Une liste ne contient que des **objets** : `List<Integer>`, pas `List<int>`. Java convertit
-`int` en `Integer` tout seul (autoboxing).
+Une liste ne contient que des objets : `List<Integer>`, jamais `List<int>`.
 
 ## 2. Créer une liste
 
-```java
-List<String> a = new ArrayList<>();                   // vide, modifiable
-List<String> b = new ArrayList<>(List.of("x", "y"));  // copie avec des valeurs, modifiable
-List<String> c = List.of("x", "y");                   // IMMUABLE : add/remove/set plantent
-List<String> d = Arrays.asList("x", "y");             // taille fixe : set marche, add/remove plantent
-```
+| Code | Résultat | Modifiable ? |
+|---|---|---|
+| `new ArrayList<>()` | `[]` | oui |
+| `new ArrayList<>(List.of("a", "b"))` | `[a, b]` | oui |
+| `List.of("a", "b")` | `[a, b]` | **non**, tout plante |
+| `List.copyOf(list)` | copie immuable | **non** |
+| `Arrays.asList("a", "b")` | `[a, b]` | `set` oui, `add`/`remove` non |
 
-## 3. Les méthodes à connaître
+## 3. Toutes les méthodes de `List`
 
-| Méthode | Ce qu'elle fait | `ArrayList` | `LinkedList` |
-|---|---|---|---|
-| `add(x)` | Ajoute à la fin | O(1) amorti | O(1) |
-| `add(i, x)` | Insère à l'indice `i` (décale le reste) | O(n) | O(n) |
-| `get(i)` | Élément à l'indice `i` | **O(1)** | O(n) |
-| `set(i, x)` | Remplace l'élément en `i` | O(1) | O(n) |
-| `remove(int i)` | Supprime à l'**indice** `i` | O(n) | O(n) |
-| `remove(Object x)` | Supprime la première **valeur** `x` | O(n) | O(n) |
-| `size()` | Nombre d'éléments | O(1) | O(1) |
-| `isEmpty()` | Taille 0 | O(1) | O(1) |
-| `contains(x)` | `x` est-il dans la liste | O(n) | O(n) |
-| `indexOf(x)` | Premier indice de `x`, ou `-1` | O(n) | O(n) |
-| `clear()` | Vide tout | O(n) | O(n) |
-| `addAll(other)` | Ajoute tous les éléments d'une autre collection | O(m) | O(m) |
-| `subList(a, b)` | Vue de `a` à `b` (**b exclu**) | O(1) | O(1) |
+Chaque exemple part de `list = new ArrayList<>(List.of("a", "b", "c"))`.
 
-### Outils pratiques
+### Ajouter
 
-| Code | Ce qu'il fait |
+| Méthode | Exemple | Résultat |
+|---|---|---|
+| `add(x)` | `list.add("d")` | `[a, b, c, d]`, renvoie `true` |
+| `add(i, x)` | `list.add(1, "x")` | `[a, x, b, c]` |
+| `addFirst(x)` | `list.addFirst("z")` | `[z, a, b, c]` |
+| `addLast(x)` | `list.addLast("d")` | `[a, b, c, d]` |
+| `addAll(c)` | `list.addAll(List.of("d", "e"))` | `[a, b, c, d, e]` |
+| `addAll(i, c)` | `list.addAll(0, List.of("z"))` | `[z, a, b, c]` |
+
+### Lire
+
+| Méthode | Exemple | Résultat |
+|---|---|---|
+| `get(i)` | `list.get(0)` | `"a"` |
+| `getFirst()` | `list.getFirst()` | `"a"` |
+| `getLast()` | `list.getLast()` | `"c"` |
+| `size()` | `list.size()` | `3` |
+| `isEmpty()` | `list.isEmpty()` | `false` |
+
+### Chercher
+
+| Méthode | Exemple | Résultat |
+|---|---|---|
+| `contains(x)` | `list.contains("b")` | `true` |
+| `containsAll(c)` | `list.containsAll(List.of("a", "c"))` | `true` |
+| `indexOf(x)` | `list.indexOf("b")` | `1` |
+| `indexOf(x)` absent | `list.indexOf("z")` | `-1` |
+| `lastIndexOf(x)` | `List.of("a", "b", "a").lastIndexOf("a")` | `2` |
+
+### Modifier
+
+| Méthode | Exemple | Résultat |
+|---|---|---|
+| `set(i, x)` | `list.set(1, "x")` | `[a, x, c]`, renvoie `"b"` |
+| `replaceAll(f)` | `list.replaceAll(String::toUpperCase)` | `[A, B, C]` |
+| `sort(comparator)` | `list.sort(Comparator.reverseOrder())` | `[c, b, a]` |
+| `sort(null)` | `list.sort(null)` | ordre naturel |
+
+### Supprimer
+
+| Méthode | Exemple | Résultat |
+|---|---|---|
+| `remove(int i)` | `list.remove(0)` | `[b, c]`, renvoie `"a"` |
+| `remove(Object x)` | `list.remove("b")` | `[a, c]`, renvoie `true` |
+| `removeFirst()` | `list.removeFirst()` | `[b, c]`, renvoie `"a"` |
+| `removeLast()` | `list.removeLast()` | `[a, b]`, renvoie `"c"` |
+| `removeIf(test)` | `list.removeIf(s -> s.equals("b"))` | `[a, c]` |
+| `removeAll(c)` | `list.removeAll(List.of("a", "b"))` | `[c]` |
+| `retainAll(c)` | `list.retainAll(List.of("a", "z"))` | `[a]` |
+| `clear()` | `list.clear()` | `[]` |
+
+### Vues et copies
+
+| Méthode | Exemple | Résultat |
+|---|---|---|
+| `subList(a, b)` | `list.subList(0, 2)` | `[a, b]` (b exclu) |
+| `reversed()` | `list.reversed()` | `[c, b, a]` |
+| `toArray()` | `list.toArray()` | `Object[]` `[a, b, c]` |
+| `toArray(array)` | `list.toArray(new String[0])` | `String[]` `[a, b, c]` |
+| `toArray(generator)` | `list.toArray(String[]::new)` | `String[]` `[a, b, c]` |
+| `List.of(...)` | `List.of(1, 2)` | `[1, 2]` immuable |
+| `List.copyOf(c)` | `List.copyOf(list)` | `[a, b, c]` immuable |
+
+### Parcourir
+
+| Méthode | Exemple | Résultat |
+|---|---|---|
+| `forEach(f)` | `list.forEach(System.out::println)` | affiche `a`, `b`, `c` |
+| `iterator()` | `list.iterator().next()` | `"a"` |
+| `listIterator()` | `list.listIterator().next()` | `"a"` |
+| `listIterator(i)` | `list.listIterator(3).previous()` | `"c"` |
+| `stream()` | `list.stream().map(String::toUpperCase).toList()` | `[A, B, C]` |
+| `parallelStream()` | `list.parallelStream().count()` | `3` |
+| `spliterator()` | `list.spliterator().estimateSize()` | `3` (utilisé par les streams, rare) |
+
+### Comparer
+
+| Méthode | Exemple | Résultat |
+|---|---|---|
+| `equals(o)` | `list.equals(List.of("a", "b", "c"))` | `true` |
+| `hashCode()` | `list.hashCode()` | `126145` |
+
+### Seulement dans `ArrayList`
+
+| Méthode | Exemple | Résultat |
+|---|---|---|
+| `ensureCapacity(n)` | `arrayList.ensureCapacity(1000)` | place pour 1000 sans agrandir |
+| `trimToSize()` | `arrayList.trimToSize()` | tableau interne réduit à `size()` |
+| `clone()` | `arrayList.clone()` | copie superficielle |
+
+### `Iterator` et `ListIterator`
+
+| Méthode | Ce qu'elle fait |
 |---|---|
-| `Collections.sort(list)` ou `list.sort(null)` | Tri croissant, sur place, O(n log n) |
-| `list.sort(Comparator.reverseOrder())` | Tri décroissant |
-| `Collections.reverse(list)` | Inverse sur place |
-| `Collections.max(list)` / `min` | Plus grand / plus petit |
-| `list.removeIf(x -> x < 0)` | Supprime tous les éléments qui vérifient une condition |
-| `String.join(", ", list)` | Colle une `List<String>` en une seule chaîne |
-| `new ArrayList<>(list)` | Copie |
+| `hasNext()` / `next()` | Y a-t-il un suivant / le récupérer |
+| `remove()` | Supprime l'élément qu'on vient de lire (sans danger pendant une boucle) |
+| `hasPrevious()` / `previous()` | `ListIterator` seulement : revenir en arrière |
+| `nextIndex()` / `previousIndex()` | `ListIterator` seulement : position actuelle |
+| `set(x)` / `add(x)` | `ListIterator` seulement : remplacer / insérer à la position actuelle |
 
-**O(1) amorti** pour `ArrayList.add` : la plupart des ajouts sont immédiats. Quand le
-tableau interne est plein, Java en crée un environ 1,5 fois plus grand et recopie tout
-(O(n)). C'est assez rare pour que la moyenne reste O(1).
+### Outils utiles de `Collections`
 
-## 4. Parcourir une liste
+| Méthode | Exemple | Résultat |
+|---|---|---|
+| `Collections.sort(list)` | avec `[c, a, b]` | `[a, b, c]` |
+| `Collections.reverse(list)` | avec `[a, b, c]` | `[c, b, a]` |
+| `Collections.max(list)` / `min` | avec `[3, 9, 2]` | `9` / `2` |
+| `Collections.frequency(list, x)` | `frequency([a, b, a], "a")` | `2` |
+| `Collections.swap(list, i, j)` | `swap([a, b, c], 0, 2)` | `[c, b, a]` |
+| `Collections.nCopies(n, x)` | `nCopies(3, "x")` | `[x, x, x]` |
+| `Collections.shuffle(list)` | avec `[a, b, c]` | ordre aléatoire |
+| `Collections.unmodifiableList(list)` | | vue en lecture seule |
+| `Collections.emptyList()` | | `[]` immuable |
+
+## 4. Coût : `ArrayList` contre `LinkedList`
+
+| Opération | `ArrayList` | `LinkedList` |
+|---|---|---|
+| `get(i)`, `set(i, x)` | **O(1)** | O(n) |
+| `add(x)` à la fin | O(1) amorti | O(1) |
+| `addFirst`, `removeFirst` | O(n) | **O(1)** |
+| `add(i, x)`, `remove(i)` | O(n) | O(n) |
+| `contains`, `indexOf` | O(n) | O(n) |
+
+O(1) amorti : quand il est plein, le tableau interne est remplacé par un 1,5 fois plus
+grand (copie en O(n)), mais c'est si rare que la moyenne reste O(1).
+
+## 5. Parcourir une liste
 
 ```java
-List<String> names = new ArrayList<>(List.of("Ada", "Alan", "Grace"));
-
-for (String name : names) {                // lecture seule
+for (String name : names) {
     System.out.println(name);
 }
 
-for (int i = 0; i < names.size(); i++) {   // besoin de l'indice
+for (int i = 0; i < names.size(); i++) {
     System.out.println(i + " " + names.get(i));
 }
 
-names.removeIf(name -> name.startsWith("A"));   // supprimer en filtrant : removeIf
+names.removeIf(name -> name.startsWith("A"));
 ```
 
-## 5. À quoi ça sert en entretien
+## 6. En entretien
 
-- Pour **collecter un résultat** dont on ne connaît pas la taille à l'avance : « renvoyer tous les... ».
-- `List<List<Integer>>` pour des résultats comme « tous les sous-ensembles », « tous les
-  chemins », « regrouper par niveau ».
-- Les listes d'adjacence des graphes : `List<List<Integer>> graph`.
-- Question « ArrayList ou LinkedList ? » : ArrayList, car `get(i)` est en O(1) et la
-  mémoire est contiguë (bien pour le cache). LinkedList ne gagne que pour insérer à une
-  position qu'on tient déjà avec un itérateur.
+- Collecter un résultat de taille inconnue : « renvoyer tous les... ».
+- `List<List<Integer>>` : tous les sous-ensembles, tous les chemins, les niveaux d'un arbre.
+- Graphes : `List<List<Integer>> graph` (liste d'adjacence).
+- « ArrayList ou LinkedList ? » : ArrayList, `get(i)` est en O(1) et la mémoire est contiguë.
 
-## 6. Pièges
+## 7. Pièges
 
-1. **`remove(int)` contre `remove(Object)`.** Sur une `List<Integer>`, `list.remove(1)`
-   supprime l'élément à l'**indice 1**, pas la valeur 1. Pour la valeur :
-   `list.remove(Integer.valueOf(1))`.
-2. **`ConcurrentModificationException`.** Supprimer dans une boucle for-each plante.
-   Utiliser `removeIf`, ou un `Iterator` avec `it.remove()`.
-3. **`List.of` est immuable.** `List.of(1, 2).add(3)` lève
-   `UnsupportedOperationException`. L'emballer : `new ArrayList<>(List.of(1, 2))`.
-4. **`Arrays.asList` a une taille fixe.** `add` et `remove` plantent, `set` marche et
-   modifie aussi le tableau d'origine.
-5. **`==` sur des `Integer`.** Deux objets `Integer` au-dessus de 127 ne sont pas `==`.
-   Utiliser `equals`.
-   ```java
-   Integer a = 1000, b = 1000;
-   a == b;        // false
-   a.equals(b);   // true
-   ```
-6. **`get(i)` sur une `LinkedList` dans une boucle** coûte O(n) à chaque fois : la boucle
-   devient O(n²).
-7. **Modifier la liste d'entrée.** Si on demande de renvoyer une nouvelle liste, copier d'abord.
+| Piège | Faux | Juste |
+|---|---|---|
+| Supprimer une valeur d'une `List<Integer>` | `list.remove(1)` supprime l'**indice** 1 | `list.remove(Integer.valueOf(1))` |
+| Supprimer dans un for-each | `ConcurrentModificationException` | `removeIf` ou `iterator.remove()` |
+| Modifier un `List.of` | `List.of(1, 2).add(3)` plante | `new ArrayList<>(List.of(1, 2))` |
+| `add` sur `Arrays.asList` | plante | `new ArrayList<>(Arrays.asList(...))` |
+| Comparer des `Integer` | `a == b` faux au-dessus de 127 | `a.equals(b)` |
+| Boucle `get(i)` sur une `LinkedList` | O(n²) | for-each |
+| Renvoyer une nouvelle liste | modifier l'entrée | copier d'abord |
 
-## 7. Exercices
+## 8. Exercices
 
-On code dans [`ListExercises.java`](../../../src/main/java/com/mastery/interview/foundations/ListExercises.java).
+Fichier : [`ListExercises.java`](../../../src/main/java/com/mastery/interview/foundations/ListExercises.java)
 
 ```bash
-mvn -Dtest='ListExercisesTest$E01LastElement' test   # un exercice
-mvn -Dtest=ListExercisesTest test                    # tout le chapitre
+mvn -Dtest='ListExercisesTest$E01LastElement' test
+mvn -Dtest=ListExercisesTest test
 ```
 
-| # | Exercice | Ce que ça entraîne |
+| # | Exercice | Exemple |
 |---|---|---|
-| 01 | `lastElement([4, 8, 15])` → `15` | `get`, `size() - 1` |
-| 02 | `sum([1, 2, 3])` → `6` | for-each sur une liste |
-| 03 | `evens([1, 2, 3, 4])` → `[2, 4]` | Construire une nouvelle liste avec `add` |
-| 04 | `addFirst(["b", "c"], "a")` → `["a", "b", "c"]` | `add(indice, x)` |
-| 05 | `removeValue([1, 2, 1], 1)` → `[2]` | `remove(Object)` contre `remove(int)`, `removeIf` |
-| 06 | `countLongWords(["hi", "hello"], 3)` → `1` | Boucle avec une condition |
-| 07 | `reversed([1, 2, 3])` → `[3, 2, 1]` | Copier, puis inverser |
-| 08 | `withoutDuplicates(["a", "b", "a"])` → `["a", "b"]` | `contains`, garder l'ordre |
-| 09 | `merge([1, 2], [3])` → `[1, 2, 3]` | `addAll` |
-| 10 | `sortedCopy(["c", "a", "b"])` → `["a", "b", "c"]` | Trier une copie, entrée intacte |
+| 01 | Dernier élément | `lastElement([4, 8, 15])` → `15` |
+| 02 | Somme | `sum([1, 2, 3])` → `6` |
+| 03 | Pairs (nouvelle liste) | `evens([1, 2, 3, 4])` → `[2, 4]` |
+| 04 | Ajouter au début | `addFirst(["b", "c"], "a")` → `["a", "b", "c"]` |
+| 05 | Supprimer toutes les occurrences | `removeValue([1, 2, 1], 1)` → `[2]` |
+| 06 | Compter les mots longs | `countLongWords(["hi", "hello", "hey"], 3)` → `1` |
+| 07 | Inversée (nouvelle liste) | `reversed([1, 2, 3])` → `[3, 2, 1]` |
+| 08 | Sans doublons | `withoutDuplicates(["a", "b", "a"])` → `["a", "b"]` |
+| 09 | Fusionner | `merge([1, 2], [3])` → `[1, 2, 3]` |
+| 10 | Copie triée | `sortedCopy(["c", "a", "b"])` → `["a", "b", "c"]` |

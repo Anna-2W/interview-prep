@@ -4,151 +4,235 @@
 
 ## 1. C'est quoi
 
-Une `Map` stocke des paires **clé → valeur**, comme un dictionnaire : un mot (la clé) donne
-sa définition (la valeur). On trouve une valeur **par sa clé**, pas par un indice.
+Une `Map` stocke des paires **clé → valeur**. On trouve une valeur **par sa clé**.
 
 ```
- Map<String, Integer> ages
-   "Ada"   -> 36
-   "Alan"  -> 41
-   "Grace" -> 85
+ "Ada"   -> 36
+ "Alan"  -> 41
+ "Grace" -> 85
 ```
 
-- **Les clés sont uniques.** Mettre une clé qui existe déjà remplace l'ancienne valeur.
-- **Les valeurs peuvent se répéter.** Deux personnes peuvent avoir le même âge.
-- Avec une `HashMap`, chercher, ajouter ou supprimer par clé coûte **O(1) en moyenne**.
-  C'est LA structure la plus utile en entretien de code.
+- Les clés sont **uniques** : remettre une clé existante remplace sa valeur.
+- Les valeurs peuvent se répéter.
+- `HashMap` : chercher, ajouter, supprimer par clé en **O(1)** en moyenne.
 
-`Map` est une interface. Trois implémentations à connaître :
-
-| Implémentation | Ordre des clés | Temps | Quand l'utiliser |
-|---|---|---|---|
-| `HashMap` | Aucun ordre garanti | O(1) en moyenne | **Choix par défaut** |
-| `LinkedHashMap` | Ordre d'insertion | O(1) en moyenne | Besoin de « le premier qui... » |
-| `TreeMap` | Clés triées | O(log n) | Besoin des clés dans l'ordre, ou de la plus petite / plus grande |
+| Implémentation | Ordre des clés | Temps |
+|---|---|---|
+| `HashMap` | aucun ordre | O(1) |
+| `LinkedHashMap` | ordre d'insertion | O(1) |
+| `TreeMap` | trié | O(log n) |
 
 ## 2. Créer une map
 
-```java
-Map<String, Integer> a = new HashMap<>();                 // vide, modifiable
-Map<String, Integer> b = Map.of("Ada", 36, "Alan", 41);   // IMMUABLE
-Map<String, Integer> c = new HashMap<>(b);                // copie modifiable
-```
+| Code | Résultat | Modifiable ? |
+|---|---|---|
+| `new HashMap<>()` | `{}` | oui |
+| `new HashMap<>(Map.of("Ada", 36))` | `{Ada=36}` | oui |
+| `Map.of("Ada", 36, "Alan", 41)` | `{Ada=36, Alan=41}` | **non** |
+| `Map.ofEntries(Map.entry("Ada", 36))` | `{Ada=36}` | **non** |
+| `Map.copyOf(map)` | copie immuable | **non** |
+| `new TreeMap<>(map)` | mêmes paires, clés triées | oui |
 
-## 3. Les méthodes à connaître
+## 3. Toutes les méthodes de `Map`
 
-| Méthode | Ce qu'elle fait | Exemple | Temps (`HashMap`) |
-|---|---|---|---|
-| `put(k, v)` | Ajoute ou remplace | `put("Ada", 36)` | O(1) |
-| `get(k)` | Valeur de `k`, ou **`null`** si absente | `get("Ada")` → `36` | O(1) |
-| `getOrDefault(k, d)` | Valeur de `k`, ou `d` si absente | `getOrDefault("Bob", 0)` → `0` | O(1) |
-| `containsKey(k)` | La clé est-elle présente | `containsKey("Ada")` → `true` | O(1) |
-| `containsValue(v)` | La valeur est-elle présente | `containsValue(36)` → `true` | **O(n)** |
-| `remove(k)` | Supprime la paire | `remove("Ada")` | O(1) |
-| `size()` / `isEmpty()` | Nombre de paires | | O(1) |
-| `putIfAbsent(k, v)` | Ajoute seulement si la clé est absente | | O(1) |
-| `merge(k, v, f)` | Absente : met `v`. Présente : combine avec `f` | `merge(c, 1, Integer::sum)` | O(1) |
-| `computeIfAbsent(k, f)` | Absente : crée la valeur avec `f`, puis la renvoie | voir plus bas | O(1) |
-| `keySet()` | Toutes les clés (un `Set`) | | vue O(1) |
-| `values()` | Toutes les valeurs (une `Collection`) | | vue O(1) |
-| `entrySet()` | Toutes les paires (`Map.Entry`) | | vue O(1) |
+Chaque exemple part de `map = new HashMap<>(Map.of("Ada", 36, "Alan", 41))`.
+Une `HashMap` peut afficher ses clés dans n'importe quel ordre.
 
-### Les bonus de `TreeMap`
+### Lire
 
-| Méthode | Ce qu'elle fait |
-|---|---|
-| `firstKey()` / `lastKey()` | Plus petite / plus grande clé |
-| `floorKey(k)` | Plus grande clé `<= k` |
-| `ceilingKey(k)` | Plus petite clé `>= k` |
+| Méthode | Exemple | Résultat |
+|---|---|---|
+| `get(k)` | `map.get("Ada")` | `36` |
+| `get(k)` absente | `map.get("Bob")` | `null` |
+| `getOrDefault(k, d)` | `map.getOrDefault("Bob", 0)` | `0` |
+| `containsKey(k)` | `map.containsKey("Ada")` | `true` |
+| `containsValue(v)` | `map.containsValue(41)` | `true` (O(n)) |
+| `size()` | `map.size()` | `2` |
+| `isEmpty()` | `map.isEmpty()` | `false` |
 
-## 4. Les deux patterns qu'on utilise tout le temps
+### Ajouter et modifier
 
-**Compter** (map de fréquences) :
+| Méthode | Exemple | Résultat |
+|---|---|---|
+| `put(k, v)` nouvelle clé | `map.put("Bob", 30)` | ajoute `Bob=30`, renvoie `null` |
+| `put(k, v)` clé existante | `map.put("Ada", 40)` | `Ada=40`, renvoie `36` (ancienne valeur) |
+| `putAll(m)` | `map.putAll(Map.of("Bob", 30))` | ajoute `Bob=30` |
+| `putIfAbsent(k, v)` | `map.putIfAbsent("Ada", 99)` | rien ne change, renvoie `36` |
+| `replace(k, v)` | `map.replace("Ada", 40)` | `Ada=40`, renvoie `36` |
+| `replace(k, v)` absente | `map.replace("Bob", 1)` | rien ne change, renvoie `null` |
+| `replace(k, old, new)` | `map.replace("Ada", 36, 40)` | `Ada=40`, renvoie `true` |
+| `replaceAll(f)` | `map.replaceAll((k, v) -> v + 1)` | `{Ada=37, Alan=42}` |
+
+### Calculer (les plus utiles)
+
+| Méthode | Exemple | Résultat |
+|---|---|---|
+| `merge(k, v, f)` présente | `map.merge("Ada", 1, Integer::sum)` | `Ada=37` |
+| `merge(k, v, f)` absente | `map.merge("Bob", 1, Integer::sum)` | ajoute `Bob=1` |
+| `compute(k, f)` | `map.compute("Ada", (k, v) -> v + 1)` | `Ada=37` |
+| `compute(k, f)` absente | `map.compute("Bob", (k, v) -> v == null ? 1 : v + 1)` | ajoute `Bob=1` |
+| `computeIfAbsent(k, f)` absente | `map.computeIfAbsent("Bob", k -> 0)` | ajoute `Bob=0`, renvoie `0` |
+| `computeIfAbsent(k, f)` présente | `map.computeIfAbsent("Ada", k -> 0)` | rien ne change, renvoie `36` |
+| `computeIfPresent(k, f)` | `map.computeIfPresent("Ada", (k, v) -> v + 1)` | `Ada=37` |
+| `computeIfPresent(k, f)` absente | `map.computeIfPresent("Bob", (k, v) -> v + 1)` | rien ne change, renvoie `null` |
+
+Si la fonction renvoie `null`, `compute`, `computeIfPresent` et `merge` **suppriment** la clé.
+
+### Supprimer
+
+| Méthode | Exemple | Résultat |
+|---|---|---|
+| `remove(k)` | `map.remove("Ada")` | `{Alan=41}`, renvoie `36` |
+| `remove(k, v)` | `map.remove("Ada", 99)` | rien ne change, renvoie `false` |
+| `clear()` | `map.clear()` | `{}` |
+
+### Vues
+
+| Méthode | Exemple | Résultat |
+|---|---|---|
+| `keySet()` | `map.keySet()` | `[Ada, Alan]` |
+| `values()` | `map.values()` | `[36, 41]` |
+| `entrySet()` | `map.entrySet()` | `[Ada=36, Alan=41]` |
+| `forEach(f)` | `map.forEach((k, v) -> System.out.println(k + " " + v))` | affiche `Ada 36`, `Alan 41` |
+
+### Comparer et construire
+
+| Méthode | Exemple | Résultat |
+|---|---|---|
+| `equals(o)` | `map.equals(Map.of("Alan", 41, "Ada", 36))` | `true` (l'ordre ne compte pas) |
+| `hashCode()` | `map.hashCode()` | un nombre, deux maps égales donnent le même |
+| `Map.entry(k, v)` | `Map.entry("Ada", 36)` | `Ada=36` |
+| `Map.of(...)` | `Map.of("a", 1)` | `{a=1}` immuable, jusqu'à 10 paires |
+| `Map.ofEntries(...)` | `Map.ofEntries(Map.entry("a", 1), Map.entry("b", 2))` | `{a=1, b=2}` immuable |
+| `Map.copyOf(m)` | `Map.copyOf(map)` | copie immuable |
+
+### `Map.Entry` (une paire)
+
+| Méthode | Exemple avec `e = Map.entry("Ada", 36)` | Résultat |
+|---|---|---|
+| `getKey()` | `e.getKey()` | `"Ada"` |
+| `getValue()` | `e.getValue()` | `36` |
+| `setValue(v)` | dans `for (var e : map.entrySet()) e.setValue(0);` | modifie la map |
+| `Map.Entry.comparingByKey()` | `entries.sort(Map.Entry.comparingByKey())` | trie les paires par clé |
+| `Map.Entry.comparingByValue()` | `entries.sort(Map.Entry.comparingByValue())` | trie les paires par valeur |
+
+## 4. Seulement dans `TreeMap` (clés triées)
+
+Chaque exemple part de `t = new TreeMap<>(Map.of(10, "a", 20, "b", 30, "c"))`.
+
+| Méthode | Exemple | Résultat |
+|---|---|---|
+| `firstKey()` / `lastKey()` | `t.firstKey()` | `10` / `30` |
+| `firstEntry()` / `lastEntry()` | `t.firstEntry()` | `10=a` / `30=c` |
+| `floorKey(k)` | `t.floorKey(25)` | `20` (plus grande `<= 25`) |
+| `ceilingKey(k)` | `t.ceilingKey(25)` | `30` (plus petite `>= 25`) |
+| `lowerKey(k)` | `t.lowerKey(20)` | `10` (plus grande `< 20`) |
+| `higherKey(k)` | `t.higherKey(20)` | `30` (plus petite `> 20`) |
+| `floorEntry`, `ceilingEntry`, `lowerEntry`, `higherEntry` | `t.floorEntry(25)` | `20=b` |
+| `headMap(k)` | `t.headMap(20)` | `{10=a}` (k exclue) |
+| `headMap(k, true)` | `t.headMap(20, true)` | `{10=a, 20=b}` |
+| `tailMap(k)` | `t.tailMap(20)` | `{20=b, 30=c}` (k incluse) |
+| `subMap(a, b)` | `t.subMap(10, 30)` | `{10=a, 20=b}` |
+| `pollFirstEntry()` | `t.pollFirstEntry()` | renvoie `10=a` et le supprime |
+| `pollLastEntry()` | `t.pollLastEntry()` | renvoie `30=c` et le supprime |
+| `descendingMap()` | `t.descendingMap()` | `{30=c, 20=b, 10=a}` |
+| `descendingKeySet()` | `t.descendingKeySet()` | `[30, 20, 10]` |
+| `navigableKeySet()` | `t.navigableKeySet()` | `[10, 20, 30]` |
+| `comparator()` | `t.comparator()` | `null` (ordre naturel) |
+
+## 5. Seulement dans `LinkedHashMap` (ordre d'insertion)
+
+Chaque exemple part de `lh = new LinkedHashMap<>()` puis `lh.put("b", 2)`.
+
+| Méthode | Exemple | Résultat |
+|---|---|---|
+| `putFirst(k, v)` | `lh.putFirst("a", 1)` | `{a=1, b=2}` |
+| `putLast(k, v)` | `lh.putLast("c", 3)` | `{b=2, c=3}` |
+| `firstEntry()` / `lastEntry()` | `lh.firstEntry()` | `b=2` |
+| `pollFirstEntry()` / `pollLastEntry()` | `lh.pollFirstEntry()` | renvoie `b=2` et le supprime |
+| `reversed()` | avec `{a=1, b=2, c=3}` | `{c=3, b=2, a=1}` |
+
+## 6. Les deux patterns à connaître par cœur
 
 ```java
 Map<Character, Integer> count = new HashMap<>();
 for (char c : "banana".toCharArray()) {
-    count.merge(c, 1, Integer::sum);       // pareil que : count.put(c, count.getOrDefault(c, 0) + 1)
+    count.merge(c, 1, Integer::sum);
 }
-// {a=3, b=1, n=2}
 ```
-
-**Regrouper** (map de listes) :
+Résultat : `{a=3, b=1, n=2}`
 
 ```java
 Map<Integer, List<String>> byLength = new HashMap<>();
 for (String word : List.of("hi", "yo", "hey")) {
     byLength.computeIfAbsent(word.length(), k -> new ArrayList<>()).add(word);
 }
-// {2=[hi, yo], 3=[hey]}
 ```
+Résultat : `{2=[hi, yo], 3=[hey]}`
 
-## 5. Parcourir une map
+## 7. Parcourir une map
 
 ```java
-Map<String, Integer> ages = Map.of("Ada", 36, "Alan", 41);
-
-for (Map.Entry<String, Integer> e : ages.entrySet()) {   // clé ET valeur : le meilleur choix
-    System.out.println(e.getKey() + " a " + e.getValue() + " ans");
+for (Map.Entry<String, Integer> e : ages.entrySet()) {
+    System.out.println(e.getKey() + " " + e.getValue());
 }
 
-for (String name : ages.keySet()) { }      // clés seulement
-for (int age : ages.values()) { }          // valeurs seulement
+for (String name : ages.keySet()) {
+}
+
+for (int age : ages.values()) {
+}
 ```
 
-## 6. À quoi ça sert en entretien
+## 8. En entretien
 
-- **« Est-ce que je l'ai déjà vu ? »** en O(1) : Two Sum mémorise chaque nombre avec son indice.
-- **Compter** : anagrammes, élément le plus fréquent, premier caractère unique.
-- **Regrouper** : grouper les anagrammes, regrouper par catégorie.
-- **Mettre en cache** les résultats d'une fonction (mémoïsation en DP).
-- Dès que la force brute a une boucle imbriquée qui **cherche** quelque chose, se demander :
-  une map peut-elle supprimer la boucle intérieure ? On passe de O(n²) à O(n).
+- « Est-ce que je l'ai déjà vu ? » en O(1) : Two Sum.
+- Compter : anagrammes, élément le plus fréquent, premier caractère unique.
+- Regrouper : grouper les anagrammes, regrouper par catégorie.
+- Mettre en cache des résultats (mémoïsation).
+- Une boucle imbriquée qui **cherche** ? Une map la supprime souvent : O(n²) devient O(n).
 
-## 7. Comment marche `HashMap` (question classique en entretien Java)
+## 9. Comment marche `HashMap`
 
-1. `key.hashCode()` donne un int.
-2. Cet int choisit un **bucket** (une case) dans un tableau interne.
-3. Plusieurs clés peuvent tomber dans le même bucket (une **collision**) : elles sont
-   gardées dans une petite liste, transformée en arbre quand elle devient longue (8+ éléments).
+1. `key.hashCode()` donne un nombre.
+2. Ce nombre choisit un **bucket** (une case) dans un tableau interne.
+3. Plusieurs clés dans le même bucket (une **collision**) sont gardées dans une petite
+   liste, transformée en arbre au-delà de 8 éléments.
 4. `key.equals(...)` trouve la bonne clé dans le bucket.
-5. Quand la map est pleine à 75 % (le **load factor**), le tableau double et toutes les clés
-   sont redistribuées (rehash).
+5. À 75 % de remplissage (le **load factor**), le tableau double et chaque clé est replacée.
 
-C'est pour ça qu'**une clé doit implémenter `equals` et `hashCode` de façon cohérente** :
-deux objets égaux doivent avoir le même hash code. Les records et `String` le font déjà.
+Donc une clé **doit** avoir `equals` et `hashCode` cohérents. `String`, `Integer` et les
+records le font déjà.
 
-## 8. Pièges
+## 10. Pièges
 
-1. **`get` renvoie `null` pour une clé absente.** `int age = map.get("Bob");` lève une
-   `NullPointerException` (déballage de `null`). Utiliser `getOrDefault` ou tester `containsKey`.
-2. **`HashMap` n'a pas d'ordre.** Ne jamais compter sur l'ordre d'affichage. Besoin d'un
-   ordre ? `LinkedHashMap` (insertion) ou `TreeMap` (trié).
-3. **`Map.of` est immuable** et refuse les clés en double et `null`.
-4. **Modifier pendant un parcours** lève `ConcurrentModificationException`. Utiliser
-   `map.entrySet().removeIf(...)`.
-5. **Clés modifiables.** Si on modifie un objet après l'avoir utilisé comme clé, son hash
-   change et la map ne le retrouve plus. Utiliser des clés immuables.
-6. **`containsValue` est en O(n)**, pas O(1).
+| Piège | Faux | Juste |
+|---|---|---|
+| Clé absente | `int age = map.get("Bob");` lève `NullPointerException` | `map.getOrDefault("Bob", 0)` |
+| Ordre | compter sur l'ordre d'une `HashMap` | `LinkedHashMap` ou `TreeMap` |
+| Modifier un `Map.of` | `Map.of("a", 1).put("b", 2)` plante | `new HashMap<>(Map.of(...))` |
+| Supprimer pendant un parcours | `ConcurrentModificationException` | `map.entrySet().removeIf(...)` |
+| Clé modifiable | modifier l'objet clé après le `put` | des clés immuables |
+| `containsValue` | croire que c'est O(1) | c'est O(n) |
 
-## 9. Exercices
+## 11. Exercices
 
-On code dans [`MapExercises.java`](../../../src/main/java/com/mastery/interview/foundations/MapExercises.java).
+Fichier : [`MapExercises.java`](../../../src/main/java/com/mastery/interview/foundations/MapExercises.java)
 
 ```bash
-mvn -Dtest='MapExercisesTest$E01AgeOf' test   # un exercice
-mvn -Dtest=MapExercisesTest test              # tout le chapitre
+mvn -Dtest='MapExercisesTest$E01AgeOf' test
+mvn -Dtest=MapExercisesTest test
 ```
 
-| # | Exercice | Ce que ça entraîne |
+| # | Exercice | Exemple |
 |---|---|---|
-| 01 | `ageOf({Ada=36}, "Ada")` → `36`, `"Bob"` → `-1` | `getOrDefault` |
-| 02 | `addPerson(map, "Bob", 30)` | `put` |
-| 03 | `birthday(map, "Ada")` → Ada a 37 ans | `get` puis `put`, clé absente |
-| 04 | `totalAge({Ada=36, Alan=41})` → `77` | `values()` |
-| 05 | `charCount("banana")` → `{a=3, b=1, n=2}` | `merge` (map de fréquences) |
-| 06 | `wordCount("to be or not to be")` → `{to=2, be=2, ...}` | `split` + `merge` |
-| 07 | `olderThan(map, 40)` → `["Alan", "Grace"]` | `entrySet()`, trier le résultat |
-| 08 | `invert({fr=France})` → `{France=fr}` | Construire une nouvelle map |
-| 09 | `groupByLength(["hi", "yo", "hey"])` → `{2=[hi, yo], 3=[hey]}` | `computeIfAbsent` |
-| 10 | `firstUniqueChar("swiss")` → `'w'` | `LinkedHashMap` ou deux passages |
+| 01 | Âge ou -1 | `ageOf({Ada=36}, "Bob")` → `-1` |
+| 02 | Ajouter une personne | `addPerson({}, "Bob", 30)` → `{Bob=30}` |
+| 03 | Anniversaire | `birthday({Ada=36}, "Ada")` → `{Ada=37}` |
+| 04 | Somme des âges | `totalAge({Ada=36, Alan=41})` → `77` |
+| 05 | Compter les caractères | `charCount("banana")` → `{a=3, b=1, n=2}` |
+| 06 | Compter les mots | `wordCount("to be or not to be")` → `{to=2, be=2, or=1, not=1}` |
+| 07 | Plus âgés que, triés | `olderThan({Ada=36, Grace=85, Alan=41}, 40)` → `["Alan", "Grace"]` |
+| 08 | Inverser | `invert({fr=France})` → `{France=fr}` |
+| 09 | Regrouper par longueur | `groupByLength(["hi", "hey", "yo"])` → `{2=[hi, yo], 3=[hey]}` |
+| 10 | Premier caractère unique | `firstUniqueChar("swiss")` → `'w'` |

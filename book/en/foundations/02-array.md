@@ -4,115 +4,166 @@
 
 ## 1. What it is
 
-An array is a **fixed-size** row of boxes, all of the **same type**, side by side in memory.
-Each box has an index starting at **0**.
+An array is a row of boxes of **fixed size**, all of the **same type**. Index starts at **0**.
 
 ```
  int[] nums = {4, 8, 15, 16};
- index:   0  1   2   3          nums.length = 4 (no parentheses: it is a field)
+ index:   0  1   2   3          nums.length = 4
 ```
 
-- **Size fixed at creation.** You cannot add a fifth box. Need to grow? Use a `List` (F03).
-- **Reading or writing by index is O(1)**: the computer jumps straight to the box.
-- An array is **mutable**: you can change the content of a box.
+- The size never changes. Need to grow? Use a `List` (F03).
+- Read or write by index: **O(1)**.
 
 ## 2. Create an array
 
-```java
-int[] a = {4, 8, 15, 16};            // with values
-int[] b = new int[5];                // 5 boxes, all at 0
-String[] c = new String[3];          // 3 boxes, all at null
-boolean[] d = new boolean[2];        // all at false
-int[][] grid = new int[3][4];        // 3 rows, 4 columns
-```
+| Code | Result |
+|---|---|
+| `int[] a = {4, 8, 15};` | `[4, 8, 15]` |
+| `new int[3]` | `[0, 0, 0]` |
+| `new boolean[2]` | `[false, false]` |
+| `new String[2]` | `[null, null]` |
+| `new int[2][3]` | 2 rows of `[0, 0, 0]` |
+| `new int[] {1, 2}` | `[1, 2]` (to pass directly to a method) |
 
-Default values: `0` for numbers, `false` for `boolean`, `'\u0000'` for `char`, `null` for objects.
+## 3. What an array has by itself
 
-## 3. Basic operations
-
-| Operation | Code | Time |
+| Code | Example with `a = {4, 8, 15}` | Result |
 |---|---|---|
-| Read a box | `a[2]` | O(1) |
-| Write a box | `a[2] = 99;` | O(1) |
-| Size | `a.length` | O(1) |
-| Search a value (unsorted) | loop over every box | O(n) |
-| Insert / delete in the middle | impossible in place, you shift or copy | O(n) |
+| `a[i]` | `a[1]` | `8` |
+| `a[i] = x` | `a[1] = 99` | `a = [4, 99, 15]` |
+| `a.length` | `a.length` | `3` (no parentheses) |
+| `a.clone()` | `int[] b = a.clone()` | `b = [4, 8, 15]`, a separate copy |
 
-## 4. The `Arrays` toolbox (`java.util.Arrays`)
+## 4. All the methods of `java.util.Arrays`
 
-| Method | What it does | Example | Time |
-|---|---|---|---|
-| `Arrays.toString(a)` | Readable text | `[4, 8, 15]` | O(n) |
-| `Arrays.sort(a)` | Sort in place, ascending | `{3,1,2}` → `{1,2,3}` | O(n log n) |
-| `Arrays.binarySearch(a, x)` | Find `x` in a **sorted** array | index, or negative if absent | O(log n) |
-| `Arrays.fill(a, x)` | Put `x` in every box | `fill(a, -1)` | O(n) |
-| `Arrays.copyOf(a, len)` | Copy, cut or padded with 0 | `copyOf({1,2}, 3)` → `{1,2,0}` | O(n) |
-| `Arrays.copyOfRange(a, from, to)` | Copy a slice (**to excluded**) | `copyOfRange({1,2,3}, 0, 2)` → `{1,2}` | O(n) |
-| `Arrays.equals(a, b)` | Same content | `equals({1,2}, {1,2})` → `true` | O(n) |
-| `Arrays.asList(...)` | View as a fixed-size `List` | see F03 | O(1) |
-| `Arrays.stream(a)` | Stream: `sum()`, `max()`... | `Arrays.stream(a).sum()` | O(n) |
+### Display
+
+| Method | Example | Result |
+|---|---|---|
+| `toString(a)` | `Arrays.toString(new int[] {3, 1, 2})` | `"[3, 1, 2]"` |
+| `deepToString(a)` | `Arrays.deepToString(new int[][] {{1, 2}, {3}})` | `"[[1, 2], [3]]"` |
+
+### Sort
+
+| Method | Example | Result |
+|---|---|---|
+| `sort(a)` | `Arrays.sort(a)` with `a = {3, 1, 2}` | `a = [1, 2, 3]` |
+| `sort(a, from, to)` | `Arrays.sort(a, 0, 2)` with `a = {3, 1, 2}` | `a = [1, 3, 2]` |
+| `sort(a, comparator)` | `Arrays.sort(b, Comparator.reverseOrder())` with `Integer[] b = {3, 1, 2}` | `b = [3, 2, 1]` |
+| `parallelSort(a)` | `Arrays.parallelSort(a)` with `a = {3, 1, 2}` | `a = [1, 2, 3]` (uses several cores) |
+
+### Search
+
+| Method | Example | Result |
+|---|---|---|
+| `binarySearch(a, x)` | `Arrays.binarySearch(new int[] {1, 2, 3}, 2)` | `1` |
+| `binarySearch(a, x)` absent | `Arrays.binarySearch(new int[] {1, 2, 3}, 5)` | `-4` (negative = absent) |
+| `binarySearch(a, from, to, x)` | `Arrays.binarySearch(new int[] {1, 2, 3}, 0, 2, 2)` | `1` |
+
+The array **must be sorted** before `binarySearch`.
+
+### Fill and build
+
+| Method | Example | Result |
+|---|---|---|
+| `fill(a, x)` | `Arrays.fill(a, 7)` with `a = new int[3]` | `a = [7, 7, 7]` |
+| `fill(a, from, to, x)` | `Arrays.fill(a, 1, 3, 0)` with `a = {3, 1, 2}` | `a = [3, 0, 0]` |
+| `setAll(a, f)` | `Arrays.setAll(a, i -> i * i)` with `a = new int[4]` | `a = [0, 1, 4, 9]` |
+| `parallelSetAll(a, f)` | `Arrays.parallelSetAll(a, i -> i * i)` | `a = [0, 1, 4, 9]` |
+| `parallelPrefix(a, f)` | `Arrays.parallelPrefix(a, Integer::sum)` with `a = {1, 2, 3, 4}` | `a = [1, 3, 6, 10]` |
+
+### Copy
+
+| Method | Example | Result |
+|---|---|---|
+| `copyOf(a, n)` | `Arrays.copyOf(new int[] {1, 2}, 3)` | `[1, 2, 0]` |
+| `copyOf(a, n)` shorter | `Arrays.copyOf(new int[] {1, 2, 3}, 2)` | `[1, 2]` |
+| `copyOfRange(a, from, to)` | `Arrays.copyOfRange(new int[] {1, 2, 3, 4}, 1, 3)` | `[2, 3]` (to excluded) |
+
+### Compare
+
+| Method | Example | Result |
+|---|---|---|
+| `equals(a, b)` | `Arrays.equals(new int[] {1, 2}, new int[] {1, 2})` | `true` |
+| `deepEquals(a, b)` | `Arrays.deepEquals(new int[][] {{1}, {2}}, new int[][] {{1}, {2}})` | `true` |
+| `compare(a, b)` | `Arrays.compare(new int[] {1, 2}, new int[] {1, 3})` | `-1` (a before b) |
+| `compareUnsigned(a, b)` | `Arrays.compareUnsigned(new int[] {-1}, new int[] {1})` | `1` |
+| `mismatch(a, b)` | `Arrays.mismatch(new int[] {1, 2, 3}, new int[] {1, 5, 3})` | `1` (first different index) |
+| `mismatch(a, b)` identical | `Arrays.mismatch(new int[] {1, 2}, new int[] {1, 2})` | `-1` |
+| `hashCode(a)` | `Arrays.hashCode(new int[] {1, 2})` | `994` |
+| `deepHashCode(a)` | `Arrays.deepHashCode(new int[][] {{1, 2}})` | `1025` |
+
+### Convert
+
+| Method | Example | Result |
+|---|---|---|
+| `asList(...)` | `Arrays.asList("a", "b")` | `[a, b]` (fixed-size `List`) |
+| `stream(a)` | `Arrays.stream(new int[] {1, 2, 3}).sum()` | `6` |
+| `stream(a)` | `Arrays.stream(new int[] {1, 2, 3}).max().getAsInt()` | `3` |
+| `spliterator(a)` | `Arrays.spliterator(new int[] {1, 2, 3}).estimateSize()` | `3` (used by streams, rare) |
+
+### Not in `Arrays` but useful: `System.arraycopy`
+
+| Method | Example | Result |
+|---|---|---|
+| `System.arraycopy(src, i, dst, j, n)` | `System.arraycopy(new int[] {1, 2}, 0, dst, 1, 2)` with `dst = new int[3]` | `dst = [0, 1, 2]` |
 
 ## 5. Going through an array
 
 ```java
-int[] nums = {4, 8, 15, 16};
-
-for (int i = 0; i < nums.length; i++) {   // index needed (to write, or compare neighbors)
+for (int i = 0; i < nums.length; i++) {
     nums[i] = nums[i] * 2;
 }
 
-for (int n : nums) {                       // read only
+for (int n : nums) {
     System.out.println(n);
 }
 
-for (int i = nums.length - 1; i >= 0; i--) {   // backwards
+for (int i = nums.length - 1; i >= 0; i--) {
     System.out.println(nums[i]);
 }
 ```
 
-The **for-each** gives you a copy of the value: `n = 0;` inside it does not change the array.
+## 6. In interviews
 
-## 6. When you use it in interviews
-
-- Half of all coding problems take an `int[]` as input.
-- Counting: `int[] count = new int[26]` for letters, `count[c - 'a']++`.
-- Classic techniques that start here: **two pointers** (one at each end), **sliding
-  window**, **prefix sums**, **binary search** on a sorted array.
-- Grids (`int[][]`, `char[][]`) for maze and island problems.
+- Half of coding problems take an `int[]`.
+- Count letters: `int[] count = new int[26]`, then `count[c - 'a']++`.
+- Techniques that start here: two pointers, sliding window, prefix sums, binary search.
+- Grids `int[][]` and `char[][]`: mazes, islands.
 
 ## 7. Traps
 
-1. **`ArrayIndexOutOfBoundsException`.** Valid indexes go from `0` to `length - 1`.
-   `i <= nums.length` in a loop is the classic bug: it must be `<`.
-2. **`==` and `equals` compare references.** `a == b` and `a.equals(b)` are `false` for two
-   arrays with the same content. Use `Arrays.equals(a, b)`.
-3. **Printing.** `System.out.println(a)` prints something like `[I@1b6d3586`.
-   Use `Arrays.toString(a)`.
-4. **Copying is not `=`.** `int[] b = a;` does not copy: `b` and `a` are the same array.
-   Changing `b[0]` changes `a[0]`. Use `a.clone()` or `Arrays.copyOf`.
-5. **Changing the input.** If a method sorts or modifies the array it receives, the caller
-   sees it. When asked to "return a new array", do not touch the input.
-6. **Empty array.** `nums[0]` on `new int[0]` throws. Ask about it in an interview.
-7. **Integer overflow.** Summing big `int`s can overflow silently. Use `long` if needed.
+| Trap | Wrong | Right |
+|---|---|---|
+| Last index | `i <= nums.length` | `i < nums.length` |
+| Compare content | `a == b` or `a.equals(b)` | `Arrays.equals(a, b)` |
+| Print | `System.out.println(a)` gives `[I@1b6d3586` | `Arrays.toString(a)` |
+| Copy | `int[] b = a;` (same array) | `int[] b = a.clone();` |
+| Max with negatives | `int max = 0;` | `int max = nums[0];` |
+| Average | `sum / n` gives an int | `(double) sum / n` |
+| Empty array | `nums[0]` throws | check `nums.length == 0` first |
+| Big sums | `int` can overflow | `long` |
+| for-each to write | `for (int n : a) n = 0;` changes nothing | `for (int i...) a[i] = 0;` |
 
 ## 8. Exercises
 
-Code in [`ArrayExercises.java`](../../../src/main/java/com/mastery/interview/foundations/ArrayExercises.java).
+File: [`ArrayExercises.java`](../../../src/main/java/com/mastery/interview/foundations/ArrayExercises.java).
+Write the loops yourself: no `Arrays.sort`, no streams.
 
 ```bash
-mvn -Dtest='ArrayExercisesTest$E01Sum' test   # one exercise
-mvn -Dtest=ArrayExercisesTest test            # the whole chapter
+mvn -Dtest='ArrayExercisesTest$E01Sum' test
+mvn -Dtest=ArrayExercisesTest test
 ```
 
-| # | Exercise | What it trains |
+| # | Exercise | Example |
 |---|---|---|
-| 01 | `sum({1, 2, 3})` → `6` | Basic loop |
-| 02 | `max({3, 9, 2})` → `9` | Start from `nums[0]`, not from 0 |
-| 03 | `contains({1, 2, 3}, 2)` → `true` | Linear search, early return |
-| 04 | `indexOf({5, 7, 5}, 5)` → `0` | Return the index, `-1` if absent |
-| 05 | `countEven({1, 2, 4})` → `2` | `%` modulo |
-| 06 | `doubled({1, 2})` → `{2, 4}` | New array, input unchanged |
-| 07 | `average({1, 2})` → `1.5` | Integer vs double division |
-| 08 | `reversed({1, 2, 3})` → `{3, 2, 1}` | Index from the end |
-| 09 | `isSorted({1, 2, 2, 5})` → `true` | Compare neighbors `i` and `i + 1` |
-| 10 | `concat({1, 2}, {3})` → `{1, 2, 3}` | Size the result, copy in two parts |
+| 01 | Sum | `sum({1, 2, 3})` → `6` |
+| 02 | Max | `max({3, 9, 2})` → `9` |
+| 03 | Contains | `contains({1, 2, 3}, 2)` → `true` |
+| 04 | Index of | `indexOf({5, 7, 5}, 5)` → `0` |
+| 05 | Count even | `countEven({1, 2, 4})` → `2` |
+| 06 | Doubled (new array) | `doubled({1, 2})` → `{2, 4}` |
+| 07 | Average | `average({1, 2})` → `1.5` |
+| 08 | Reversed (new array) | `reversed({1, 2, 3})` → `{3, 2, 1}` |
+| 09 | Is sorted | `isSorted({1, 2, 2, 5})` → `true` |
+| 10 | Concat | `concat({1, 2}, {3})` → `{1, 2, 3}` |

@@ -4,118 +4,167 @@
 
 ## 1. C'est quoi
 
-Un tableau est une rangée de cases de **taille fixe**, toutes du **même type**, côte à côte
-en mémoire. Chaque case a un indice qui commence à **0**.
+Un tableau est une rangée de cases de **taille fixe**, toutes du **même type**. L'indice commence à **0**.
 
 ```
  int[] nums = {4, 8, 15, 16};
- indice:  0  1   2   3          nums.length = 4 (sans parenthèses : c'est un champ)
+ indice:  0  1   2   3          nums.length = 4
 ```
 
-- **Taille fixée à la création.** Impossible d'ajouter une cinquième case. Besoin de
-  grandir ? Utiliser une `List` (F03).
-- **Lire ou écrire par indice coûte O(1)** : l'ordinateur saute directement à la case.
-- Un tableau est **modifiable** : on peut changer le contenu d'une case.
+- La taille ne change jamais. Besoin de grandir ? Utiliser une `List` (F03).
+- Lire ou écrire par indice : **O(1)**.
 
 ## 2. Créer un tableau
 
-```java
-int[] a = {4, 8, 15, 16};            // avec des valeurs
-int[] b = new int[5];                // 5 cases, toutes à 0
-String[] c = new String[3];          // 3 cases, toutes à null
-boolean[] d = new boolean[2];        // toutes à false
-int[][] grid = new int[3][4];        // 3 lignes, 4 colonnes
-```
+| Code | Résultat |
+|---|---|
+| `int[] a = {4, 8, 15};` | `[4, 8, 15]` |
+| `new int[3]` | `[0, 0, 0]` |
+| `new boolean[2]` | `[false, false]` |
+| `new String[2]` | `[null, null]` |
+| `new int[2][3]` | 2 lignes de `[0, 0, 0]` |
+| `new int[] {1, 2}` | `[1, 2]` (pour le passer directement à une méthode) |
 
-Valeurs par défaut : `0` pour les nombres, `false` pour `boolean`, `'\u0000'` pour `char`,
-`null` pour les objets.
+## 3. Ce qu'un tableau a tout seul
 
-## 3. Opérations de base
-
-| Opération | Code | Temps |
+| Code | Exemple avec `a = {4, 8, 15}` | Résultat |
 |---|---|---|
-| Lire une case | `a[2]` | O(1) |
-| Écrire une case | `a[2] = 99;` | O(1) |
-| Taille | `a.length` | O(1) |
-| Chercher une valeur (non trié) | boucle sur toutes les cases | O(n) |
-| Insérer / supprimer au milieu | impossible sur place, on décale ou on copie | O(n) |
+| `a[i]` | `a[1]` | `8` |
+| `a[i] = x` | `a[1] = 99` | `a = [4, 99, 15]` |
+| `a.length` | `a.length` | `3` (sans parenthèses) |
+| `a.clone()` | `int[] b = a.clone()` | `b = [4, 8, 15]`, une copie séparée |
 
-## 4. La boîte à outils `Arrays` (`java.util.Arrays`)
+## 4. Toutes les méthodes de `java.util.Arrays`
 
-| Méthode | Ce qu'elle fait | Exemple | Temps |
-|---|---|---|---|
-| `Arrays.toString(a)` | Texte lisible | `[4, 8, 15]` | O(n) |
-| `Arrays.sort(a)` | Trie sur place, croissant | `{3,1,2}` → `{1,2,3}` | O(n log n) |
-| `Arrays.binarySearch(a, x)` | Cherche `x` dans un tableau **trié** | indice, ou négatif si absent | O(log n) |
-| `Arrays.fill(a, x)` | Met `x` dans toutes les cases | `fill(a, -1)` | O(n) |
-| `Arrays.copyOf(a, len)` | Copie, coupée ou complétée par des 0 | `copyOf({1,2}, 3)` → `{1,2,0}` | O(n) |
-| `Arrays.copyOfRange(a, from, to)` | Copie une tranche (**to exclu**) | `copyOfRange({1,2,3}, 0, 2)` → `{1,2}` | O(n) |
-| `Arrays.equals(a, b)` | Même contenu | `equals({1,2}, {1,2})` → `true` | O(n) |
-| `Arrays.asList(...)` | Vue en `List` de taille fixe | voir F03 | O(1) |
-| `Arrays.stream(a)` | Stream : `sum()`, `max()`... | `Arrays.stream(a).sum()` | O(n) |
+### Afficher
+
+| Méthode | Exemple | Résultat |
+|---|---|---|
+| `toString(a)` | `Arrays.toString(new int[] {3, 1, 2})` | `"[3, 1, 2]"` |
+| `deepToString(a)` | `Arrays.deepToString(new int[][] {{1, 2}, {3}})` | `"[[1, 2], [3]]"` |
+
+### Trier
+
+| Méthode | Exemple | Résultat |
+|---|---|---|
+| `sort(a)` | `Arrays.sort(a)` avec `a = {3, 1, 2}` | `a = [1, 2, 3]` |
+| `sort(a, from, to)` | `Arrays.sort(a, 0, 2)` avec `a = {3, 1, 2}` | `a = [1, 3, 2]` |
+| `sort(a, comparator)` | `Arrays.sort(b, Comparator.reverseOrder())` avec `Integer[] b = {3, 1, 2}` | `b = [3, 2, 1]` |
+| `parallelSort(a)` | `Arrays.parallelSort(a)` avec `a = {3, 1, 2}` | `a = [1, 2, 3]` (utilise plusieurs cœurs) |
+
+### Chercher
+
+| Méthode | Exemple | Résultat |
+|---|---|---|
+| `binarySearch(a, x)` | `Arrays.binarySearch(new int[] {1, 2, 3}, 2)` | `1` |
+| `binarySearch(a, x)` absent | `Arrays.binarySearch(new int[] {1, 2, 3}, 5)` | `-4` (négatif = absent) |
+| `binarySearch(a, from, to, x)` | `Arrays.binarySearch(new int[] {1, 2, 3}, 0, 2, 2)` | `1` |
+
+Le tableau **doit être trié** avant `binarySearch`.
+
+### Remplir et construire
+
+| Méthode | Exemple | Résultat |
+|---|---|---|
+| `fill(a, x)` | `Arrays.fill(a, 7)` avec `a = new int[3]` | `a = [7, 7, 7]` |
+| `fill(a, from, to, x)` | `Arrays.fill(a, 1, 3, 0)` avec `a = {3, 1, 2}` | `a = [3, 0, 0]` |
+| `setAll(a, f)` | `Arrays.setAll(a, i -> i * i)` avec `a = new int[4]` | `a = [0, 1, 4, 9]` |
+| `parallelSetAll(a, f)` | `Arrays.parallelSetAll(a, i -> i * i)` | `a = [0, 1, 4, 9]` |
+| `parallelPrefix(a, f)` | `Arrays.parallelPrefix(a, Integer::sum)` avec `a = {1, 2, 3, 4}` | `a = [1, 3, 6, 10]` |
+
+### Copier
+
+| Méthode | Exemple | Résultat |
+|---|---|---|
+| `copyOf(a, n)` | `Arrays.copyOf(new int[] {1, 2}, 3)` | `[1, 2, 0]` |
+| `copyOf(a, n)` plus court | `Arrays.copyOf(new int[] {1, 2, 3}, 2)` | `[1, 2]` |
+| `copyOfRange(a, from, to)` | `Arrays.copyOfRange(new int[] {1, 2, 3, 4}, 1, 3)` | `[2, 3]` (to exclu) |
+
+### Comparer
+
+| Méthode | Exemple | Résultat |
+|---|---|---|
+| `equals(a, b)` | `Arrays.equals(new int[] {1, 2}, new int[] {1, 2})` | `true` |
+| `deepEquals(a, b)` | `Arrays.deepEquals(new int[][] {{1}, {2}}, new int[][] {{1}, {2}})` | `true` |
+| `compare(a, b)` | `Arrays.compare(new int[] {1, 2}, new int[] {1, 3})` | `-1` (a avant b) |
+| `compareUnsigned(a, b)` | `Arrays.compareUnsigned(new int[] {-1}, new int[] {1})` | `1` |
+| `mismatch(a, b)` | `Arrays.mismatch(new int[] {1, 2, 3}, new int[] {1, 5, 3})` | `1` (premier indice différent) |
+| `mismatch(a, b)` identiques | `Arrays.mismatch(new int[] {1, 2}, new int[] {1, 2})` | `-1` |
+| `hashCode(a)` | `Arrays.hashCode(new int[] {1, 2})` | `994` |
+| `deepHashCode(a)` | `Arrays.deepHashCode(new int[][] {{1, 2}})` | `1025` |
+
+### Convertir
+
+| Méthode | Exemple | Résultat |
+|---|---|---|
+| `asList(...)` | `Arrays.asList("a", "b")` | `[a, b]` (`List` de taille fixe) |
+| `stream(a)` | `Arrays.stream(new int[] {1, 2, 3}).sum()` | `6` |
+| `stream(a)` | `Arrays.stream(new int[] {1, 2, 3}).max().getAsInt()` | `3` |
+| `spliterator(a)` | `Arrays.spliterator(new int[] {1, 2, 3}).estimateSize()` | `3` (utilisé par les streams, rare) |
+
+### Pas dans `Arrays` mais utile : `System.arraycopy`
+
+| Méthode | Exemple | Résultat |
+|---|---|---|
+| `System.arraycopy(src, i, dst, j, n)` | `System.arraycopy(new int[] {1, 2}, 0, dst, 1, 2)` avec `dst = new int[3]` | `dst = [0, 1, 2]` |
 
 ## 5. Parcourir un tableau
 
 ```java
-int[] nums = {4, 8, 15, 16};
-
-for (int i = 0; i < nums.length; i++) {   // besoin de l'indice (pour écrire, ou comparer les voisins)
+for (int i = 0; i < nums.length; i++) {
     nums[i] = nums[i] * 2;
 }
 
-for (int n : nums) {                       // lecture seule
+for (int n : nums) {
     System.out.println(n);
 }
 
-for (int i = nums.length - 1; i >= 0; i--) {   // à l'envers
+for (int i = nums.length - 1; i >= 0; i--) {
     System.out.println(nums[i]);
 }
 ```
 
-Le **for-each** donne une copie de la valeur : `n = 0;` dedans ne change pas le tableau.
+## 6. En entretien
 
-## 6. À quoi ça sert en entretien
-
-- La moitié des exos de code prennent un `int[]` en entrée.
-- Compter : `int[] count = new int[26]` pour les lettres, `count[c - 'a']++`.
-- Les techniques classiques qui démarrent ici : **deux pointeurs** (un à chaque bout),
-  **fenêtre glissante**, **sommes préfixes**, **recherche dichotomique** sur un tableau trié.
-- Les grilles (`int[][]`, `char[][]`) pour les problèmes de labyrinthe et d'îles.
+- La moitié des exos de code prennent un `int[]`.
+- Compter les lettres : `int[] count = new int[26]`, puis `count[c - 'a']++`.
+- Les techniques qui démarrent ici : deux pointeurs, fenêtre glissante, sommes préfixes,
+  recherche dichotomique.
+- Les grilles `int[][]` et `char[][]` : labyrinthes, îles.
 
 ## 7. Pièges
 
-1. **`ArrayIndexOutOfBoundsException`.** Les indices valides vont de `0` à `length - 1`.
-   `i <= nums.length` dans une boucle est le bug classique : il faut `<`.
-2. **`==` et `equals` comparent les références.** `a == b` et `a.equals(b)` valent `false`
-   pour deux tableaux au même contenu. Utiliser `Arrays.equals(a, b)`.
-3. **Affichage.** `System.out.println(a)` affiche un truc du genre `[I@1b6d3586`.
-   Utiliser `Arrays.toString(a)`.
-4. **Copier, ce n'est pas `=`.** `int[] b = a;` ne copie rien : `b` et `a` sont le même
-   tableau. Modifier `b[0]` modifie `a[0]`. Utiliser `a.clone()` ou `Arrays.copyOf`.
-5. **Modifier l'entrée.** Si une méthode trie ou modifie le tableau reçu, l'appelant le
-   voit. Quand on demande de « renvoyer un nouveau tableau », on ne touche pas l'entrée.
-6. **Tableau vide.** `nums[0]` sur `new int[0]` plante. À demander en entretien.
-7. **Dépassement d'entier.** Additionner de gros `int` peut déborder sans prévenir.
-   Utiliser `long` si besoin.
+| Piège | Faux | Juste |
+|---|---|---|
+| Dernier indice | `i <= nums.length` | `i < nums.length` |
+| Comparer le contenu | `a == b` ou `a.equals(b)` | `Arrays.equals(a, b)` |
+| Afficher | `System.out.println(a)` donne `[I@1b6d3586` | `Arrays.toString(a)` |
+| Copier | `int[] b = a;` (même tableau) | `int[] b = a.clone();` |
+| Max avec des négatifs | `int max = 0;` | `int max = nums[0];` |
+| Moyenne | `sum / n` donne un int | `(double) sum / n` |
+| Tableau vide | `nums[0]` plante | tester `nums.length == 0` d'abord |
+| Grosses sommes | un `int` peut déborder | `long` |
+| for-each pour écrire | `for (int n : a) n = 0;` ne change rien | `for (int i...) a[i] = 0;` |
 
 ## 8. Exercices
 
-On code dans [`ArrayExercises.java`](../../../src/main/java/com/mastery/interview/foundations/ArrayExercises.java).
+Fichier : [`ArrayExercises.java`](../../../src/main/java/com/mastery/interview/foundations/ArrayExercises.java).
+Écrire les boucles soi-même : pas de `Arrays.sort`, pas de streams.
 
 ```bash
-mvn -Dtest='ArrayExercisesTest$E01Sum' test   # un exercice
-mvn -Dtest=ArrayExercisesTest test            # tout le chapitre
+mvn -Dtest='ArrayExercisesTest$E01Sum' test
+mvn -Dtest=ArrayExercisesTest test
 ```
 
-| # | Exercice | Ce que ça entraîne |
+| # | Exercice | Exemple |
 |---|---|---|
-| 01 | `sum({1, 2, 3})` → `6` | Boucle de base |
-| 02 | `max({3, 9, 2})` → `9` | Partir de `nums[0]`, pas de 0 |
-| 03 | `contains({1, 2, 3}, 2)` → `true` | Recherche linéaire, sortie anticipée |
-| 04 | `indexOf({5, 7, 5}, 5)` → `0` | Renvoyer l'indice, `-1` si absent |
-| 05 | `countEven({1, 2, 4})` → `2` | Modulo `%` |
-| 06 | `doubled({1, 2})` → `{2, 4}` | Nouveau tableau, entrée intacte |
-| 07 | `average({1, 2})` → `1.5` | Division entière contre division décimale |
-| 08 | `reversed({1, 2, 3})` → `{3, 2, 1}` | Indice depuis la fin |
-| 09 | `isSorted({1, 2, 2, 5})` → `true` | Comparer les voisins `i` et `i + 1` |
-| 10 | `concat({1, 2}, {3})` → `{1, 2, 3}` | Dimensionner le résultat, copier en deux fois |
+| 01 | Somme | `sum({1, 2, 3})` → `6` |
+| 02 | Maximum | `max({3, 9, 2})` → `9` |
+| 03 | Contient | `contains({1, 2, 3}, 2)` → `true` |
+| 04 | Indice de | `indexOf({5, 7, 5}, 5)` → `0` |
+| 05 | Compter les pairs | `countEven({1, 2, 4})` → `2` |
+| 06 | Doublé (nouveau tableau) | `doubled({1, 2})` → `{2, 4}` |
+| 07 | Moyenne | `average({1, 2})` → `1.5` |
+| 08 | Inversé (nouveau tableau) | `reversed({1, 2, 3})` → `{3, 2, 1}` |
+| 09 | Est trié | `isSorted({1, 2, 2, 5})` → `true` |
+| 10 | Concaténer | `concat({1, 2}, {3})` → `{1, 2, 3}` |
