@@ -36,7 +36,7 @@ plus lente mais bien expliquée.
 1. **Comprendre.** Reformuler le problème avec ses mots. Demander la taille de l'entrée,
    le cas vide, les doublons, les négatifs, si c'est trié ou non. Écrire 2 exemples.
 2. **Reconnaître.** À quel pattern ça ressemble ? Hachage, deux pointeurs, fenêtre
-   glissante, BFS, DP... Les patterns sont au chapitre 06.
+   glissante, BFS, DP... Les patterns sont au chapitre 03.
 3. **Force brute d'abord.** La dire à voix haute avec sa complexité, même si elle est
    mauvaise. Ça prouve qu'on sait résoudre le problème et ça donne une base.
 4. **Optimiser.** Où est le travail répété ? Une table de hachage, un tri ou un tas
@@ -74,7 +74,7 @@ Avant de négocier, toujours connaître :
 - son chiffre cible et son seuil de refus,
 - le package complet : fixe, variable, actions, politique de télétravail, budget formation.
 
-Le chapitre 14 couvre la négociation elle-même.
+Le chapitre 15 couvre la négociation elle-même.
 
 ## 5. Questions posées sur ce chapitre
 

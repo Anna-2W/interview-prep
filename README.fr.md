@@ -47,7 +47,8 @@ avec un exemple, et 10 exos faciles par chapitre.
 |---|---|---|---|
 | 01 | Complexité (Big O) · [FR](book/fr/01-complexity.md) · [EN](book/en/01-complexity.md) | [ComplexityQuiz.java](src/main/java/com/mastery/interview/complexity/ComplexityQuiz.java) · [FasterExercises.java](src/main/java/com/mastery/interview/complexity/FasterExercises.java) | `mvn -Dtest=ComplexityQuizTest test` · `mvn -Dtest=FasterExercisesTest test` |
 | 02 | Structures de données à la main · [FR](book/fr/02-data-structures-by-hand.md) · [EN](book/en/02-data-structures-by-hand.md) | [datastructures/](src/main/java/com/mastery/interview/datastructures/) (6 classes + `LinkedListProblems`) | `mvn -Dtest='My*Test,LinkedListProblemsTest' test` |
-| 03 | Patterns d'algorithmes | à venir | |
+| 03 | Patterns d'algorithmes · [FR](book/fr/03-patterns.md) · [EN](book/en/03-patterns.md) | [patterns/](src/main/java/com/mastery/interview/patterns/) (10 packages, un par pattern) | `mvn -Dtest='com/mastery/interview/patterns/**/*Test' test` |
+| 04 | Arbres et tas | à venir | |
 
 La liste complète des chapitres est dans le [sommaire du livre](book/README.fr.md).
 

@@ -30,7 +30,7 @@ fermer, et refaire le problème 2 jours plus tard. Un exo n'est « fait » que r
 - [ ] Partie 0, les bases : [String](book/fr/foundations/01-string.md), [Array](book/fr/foundations/02-array.md), [List](book/fr/foundations/03-list.md), [Map](book/fr/foundations/04-map.md), [Set](book/fr/foundations/05-set.md), [Stack et Queue](book/fr/foundations/06-stack-queue.md), tous les exos au vert
 - [ ] Résoudre l'échauffement `TwoSum`
 - [ ] Résoudre 3 exos faciles chronométrés, noter où ça a bloqué
-- [ ] Écrire son pitch d'une minute « parlez-moi de vous » (chapitre 14 du livre)
+- [ ] Écrire son pitch d'une minute « parlez-moi de vous » (chapitre 15 du livre)
 - [ ] Noter son salaire actuel et la fourchette du marché pour son niveau (dans `private/`, jamais commité)
 
 ## Phase 1 : Bases et patterns (semaines 1 à 4)
@@ -91,7 +91,7 @@ fermer, et refaire le problème 2 jours plus tard. Un exo n'est « fait » que r
 - [ ] Mettre à jour CV et LinkedIn, postuler d'abord dans une boîte « d'entraînement », puis
       dans les boîtes visées
 - [ ] Préparer la négociation : données du marché, son chiffre, son seuil de refus, ne pas
-      donner le premier chiffre si on peut l'éviter (chapitre 14 du livre)
+      donner le premier chiffre si on peut l'éviter (chapitre 15 du livre)
 
 ---
 
@@ -100,7 +100,7 @@ fermer, et refaire le problème 2 jours plus tard. Un exo n'est « fait » que r
 | | Nombre |
 |---|---|
 | Exos de code | ~110 (plus les reprises) |
-| Chapitres du livre | 15 |
+| Chapitres du livre | 16 |
 | System designs | 10 |
 | Histoires STAR | 8 |
 | Entretiens blancs | 8 ou plus |

@@ -27,18 +27,19 @@ Toutes les méthodes des classes qu'on utilise tous les jours, chacune avec un e
 | 00 | [Comment se passe un entretien tech](fr/00-how-interviews-work.md) | Les étapes, la méthode en 6 étapes, niveaux et salaire | ✅ |
 | 01 | [Complexité](fr/01-complexity.md) | Big O, Omega, Theta, complexité en espace, coût amorti, coût de la récursion | ✅ |
 | 02 | [Structures de données à la main](fr/02-data-structures-by-hand.md) | Tableau dynamique, listes chaînées (toutes les variantes), pile, file, file circulaire, table de hachage, filtre de Bloom | ✅ |
-| 03 | Arbres et tas | Arbres binaires, BST, AVL, rouge-noir, B-arbres, tas, tries, arbres radix | ⏳ |
-| 04 | Graphes | Représentations, DFS, BFS, tri topologique, plus courts chemins, arbre couvrant minimal, union-find | ⏳ |
-| 05 | Tri et recherche | Tous les tris et leurs compromis, recherche dichotomique et ses variantes | ⏳ |
-| 06 | Paradigmes et patterns | Récursion, diviser pour régner, glouton, DP, backtracking, fenêtre glissante, deux pointeurs, bits | ⏳ |
-| 07 | Chaînes de caractères | KMP, Rabin-Karp, Z, Manacher, tries, tableaux de suffixes, distance d'édition | ⏳ |
-| 08 | Java en profondeur | Langage, collections en interne, génériques, streams, concurrence, JVM, GC, Spring | ⏳ |
-| 09 | POO, SOLID et design patterns | Paradigmes, principes, les 23 patterns du Gang of Four, conception bas niveau | ⏳ |
-| 10 | System design et architecture | Scalabilité, cache, répartition de charge, systèmes distribués, microservices, messagerie | ⏳ |
-| 11 | Systèmes d'exploitation | Processus, threads, synchronisation, interblocages, ordonnancement, mémoire, systèmes de fichiers | ⏳ |
-| 12 | Réseau | OSI, TCP/IP, TCP vs UDP, HTTP, DNS, TLS, sockets, RPC | ⏳ |
-| 13 | Bases de données | SQL (DML, DDL, DCL), jointures, index, transactions, isolation, normalisation, NoSQL | ⏳ |
-| 14 | Comportemental et négociation | Pitch, histoires STAR, questions à poser, négociation de l'offre | ⏳ |
+| 03 | [Patterns d'algorithmes](fr/03-patterns.md) | Hachage, deux pointeurs, fenêtre glissante, sommes préfixes, pointeurs lent et rapide, dichotomie, pile monotone, intervalles, tas, bits, backtracking | ✅ |
+| 04 | Arbres et tas | Arbres binaires, BST, AVL, rouge-noir, B-arbres, tas, tries, arbres radix | ⏳ |
+| 05 | Graphes | Représentations, DFS, BFS, tri topologique, plus courts chemins, arbre couvrant minimal, union-find | ⏳ |
+| 06 | Tri et recherche | Tous les tris et leurs compromis, recherche dichotomique et ses variantes | ⏳ |
+| 07 | Paradigmes | Récursion, diviser pour régner, glouton, programmation dynamique, backtracking avancé | ⏳ |
+| 08 | Chaînes de caractères | KMP, Rabin-Karp, Z, Manacher, tries, tableaux de suffixes, distance d'édition | ⏳ |
+| 09 | Java en profondeur | Langage, collections en interne, génériques, streams, concurrence, JVM, GC, Spring | ⏳ |
+| 10 | POO, SOLID et design patterns | Paradigmes, principes, les 23 patterns du Gang of Four, conception bas niveau | ⏳ |
+| 11 | System design et architecture | Scalabilité, cache, répartition de charge, systèmes distribués, microservices, messagerie | ⏳ |
+| 12 | Systèmes d'exploitation | Processus, threads, synchronisation, interblocages, ordonnancement, mémoire, systèmes de fichiers | ⏳ |
+| 13 | Réseau | OSI, TCP/IP, TCP vs UDP, HTTP, DNS, TLS, sockets, RPC | ⏳ |
+| 14 | Bases de données | SQL (DML, DDL, DCL), jointures, index, transactions, isolation, normalisation, NoSQL | ⏳ |
+| 15 | Comportemental et négociation | Pitch, histoires STAR, questions à poser, négociation de l'offre | ⏳ |
 
 Les chapitres sont dans [`en/`](en/) et [`fr/`](fr/), avec les mêmes noms de fichiers.
 

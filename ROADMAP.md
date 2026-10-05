@@ -30,7 +30,7 @@ and redo the problem 2 days later. A problem counts as "done" only when solved a
 - [ ] Part 0 foundations: [String](book/en/foundations/01-string.md), [Array](book/en/foundations/02-array.md), [List](book/en/foundations/03-list.md), [Map](book/en/foundations/04-map.md), [Set](book/en/foundations/05-set.md), [Stack and Queue](book/en/foundations/06-stack-queue.md), all exercises green
 - [ ] Solve the warm-up `TwoSum`
 - [ ] Solve 3 easy problems timed, write down where you got stuck
-- [ ] Write your 1-minute "tell me about yourself" pitch (book chapter 14)
+- [ ] Write your 1-minute "tell me about yourself" pitch (book chapter 15)
 - [ ] Note your current salary and the market range for your level (in `private/`, never committed)
 
 ## Phase 1: Foundations and patterns (weeks 1 to 4)
@@ -89,7 +89,7 @@ and redo the problem 2 days later. A problem counts as "done" only when solved a
 - [ ] 4 full mock interviews (coding + design + behavioral)
 - [ ] Update CV and LinkedIn, apply to a "practice" company first, then the target ones
 - [ ] Prepare the negotiation: market data, your number, your walk-away number, never give
-      the first figure if you can avoid it (book chapter 14)
+      the first figure if you can avoid it (book chapter 15)
 
 ---
 
@@ -98,7 +98,7 @@ and redo the problem 2 days later. A problem counts as "done" only when solved a
 | | Count |
 |---|---|
 | Coding problems | ~110 (plus redos) |
-| Book chapters | 15 |
+| Book chapters | 16 |
 | System designs | 10 |
 | STAR stories | 8 |
 | Mock interviews | 8 or more |

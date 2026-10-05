@@ -36,7 +36,7 @@ was explained well.
 1. **Understand.** Repeat the problem in your own words. Ask about input size, empty
    input, duplicates, negative numbers, sorted or not. Write 2 examples.
 2. **Match.** Which pattern does it look like? Hashing, two pointers, sliding window,
-   BFS, DP... The patterns are in chapter 06.
+   BFS, DP... The patterns are in chapter 03.
 3. **Brute force first.** Say it out loud with its complexity, even if it is bad. It
    proves you can solve the problem and gives a baseline.
 4. **Optimize.** Where is the repeated work? Can a hash map, a sort, or a heap remove it?
@@ -73,7 +73,7 @@ Before negotiating, always know:
 - your target number and your walk-away number,
 - the full package: base, bonus, equity, remote policy, training budget.
 
-Chapter 14 covers the negotiation itself.
+Chapter 15 covers the negotiation itself.
 
 ## 5. Questions interviewers ask about this chapter
 
