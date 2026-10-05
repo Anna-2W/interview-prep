@@ -18,6 +18,8 @@ public final class ComplexityQuiz {
         return total;
     }
 
+    // Q01  Return the time complexity of q01Code above, as a string like "O(n)".
+    //      Renvoyer la complexité en temps de q01Code ci-dessus, sous forme de chaîne comme "O(n)".
     public static String q01() {
         throw new UnsupportedOperationException("TODO");
     }
@@ -26,6 +28,8 @@ public final class ComplexityQuiz {
         return a[0];
     }
 
+    // Q02  Return the time complexity of q02Code above, as a string like "O(n)".
+    //      Renvoyer la complexité en temps de q02Code ci-dessus, sous forme de chaîne comme "O(n)".
     public static String q02() {
         throw new UnsupportedOperationException("TODO");
     }
@@ -42,6 +46,8 @@ public final class ComplexityQuiz {
         return pairs;
     }
 
+    // Q03  Return the time complexity of q03Code above, as a string like "O(n)".
+    //      Renvoyer la complexité en temps de q03Code ci-dessus, sous forme de chaîne comme "O(n)".
     public static String q03() {
         throw new UnsupportedOperationException("TODO");
     }
@@ -54,6 +60,8 @@ public final class ComplexityQuiz {
         return steps;
     }
 
+    // Q04  Return the time complexity of q04Code above, as a string like "O(n)".
+    //      Renvoyer la complexité en temps de q04Code ci-dessus, sous forme de chaîne comme "O(n)".
     public static String q04() {
         throw new UnsupportedOperationException("TODO");
     }
@@ -70,6 +78,8 @@ public final class ComplexityQuiz {
         return max - min;
     }
 
+    // Q05  Return the time complexity of q05Code above, as a string like "O(n)".
+    //      Renvoyer la complexité en temps de q05Code ci-dessus, sous forme de chaîne comme "O(n)".
     public static String q05() {
         throw new UnsupportedOperationException("TODO");
     }
@@ -86,6 +96,8 @@ public final class ComplexityQuiz {
         return same;
     }
 
+    // Q06  Return the time complexity of q06Code above, as a string like "O(n)".
+    //      Renvoyer la complexité en temps de q06Code ci-dessus, sous forme de chaîne comme "O(n)".
     public static String q06() {
         throw new UnsupportedOperationException("TODO");
     }
@@ -102,6 +114,8 @@ public final class ComplexityQuiz {
         return found;
     }
 
+    // Q07  Return the time complexity of q07Code above, as a string like "O(n)".
+    //      Renvoyer la complexité en temps de q07Code ci-dessus, sous forme de chaîne comme "O(n)".
     public static String q07() {
         throw new UnsupportedOperationException("TODO");
     }
@@ -117,6 +131,8 @@ public final class ComplexityQuiz {
         return gaps;
     }
 
+    // Q08  Return the time complexity of q08Code above, as a string like "O(n)".
+    //      Renvoyer la complexité en temps de q08Code ci-dessus, sous forme de chaîne comme "O(n)".
     public static String q08() {
         throw new UnsupportedOperationException("TODO");
     }
@@ -131,7 +147,8 @@ public final class ComplexityQuiz {
         return found;
     }
 
-    // Q09: list and targets both have n elements / list et targets ont tous les deux n éléments
+    // Q09  Return the time complexity of q09Code above. list and targets both have n elements.
+    //      Renvoyer la complexité en temps de q09Code ci-dessus. list et targets ont tous les deux n éléments.
     public static String q09() {
         throw new UnsupportedOperationException("TODO");
     }
@@ -143,6 +160,8 @@ public final class ComplexityQuiz {
         return q10Code(n - 1) + q10Code(n - 2);
     }
 
+    // Q10  Return the time complexity of q10Code above, as a string like "O(n)".
+    //      Renvoyer la complexité en temps de q10Code ci-dessus, sous forme de chaîne comme "O(n)".
     public static String q10() {
         throw new UnsupportedOperationException("TODO");
     }
