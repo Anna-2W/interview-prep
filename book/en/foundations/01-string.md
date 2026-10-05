@@ -238,3 +238,7 @@ mvn -Dtest=StringExercisesTest test
 | 08 | Count vowels | `countVowels("Interview")` → `4` |
 | 09 | Initials | `initials("Ada Lovelace")` → `"AL"` |
 | 10 | URL slug | `slug("  Hello World  ")` → `"hello-world"` |
+
+---
+
+⬅️ [Table of contents](../../README.md) · [README](../../../README.md)

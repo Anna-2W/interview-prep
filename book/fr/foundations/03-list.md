@@ -217,3 +217,7 @@ mvn -Dtest=ListExercisesTest test
 | 08 | Sans doublons | `withoutDuplicates(["a", "b", "a"])` → `["a", "b"]` |
 | 09 | Fusionner | `merge([1, 2], [3])` → `[1, 2, 3]` |
 | 10 | Copie triée | `sortedCopy(["c", "a", "b"])` → `["a", "b", "c"]` |
+
+---
+
+⬅️ [Sommaire](../../README.fr.md) · [README](../../../README.fr.md)

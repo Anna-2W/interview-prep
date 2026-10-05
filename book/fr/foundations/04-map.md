@@ -236,3 +236,7 @@ mvn -Dtest=MapExercisesTest test
 | 08 | Inverser | `invert({fr=France})` → `{France=fr}` |
 | 09 | Regrouper par longueur | `groupByLength(["hi", "hey", "yo"])` → `{2=[hi, yo], 3=[hey]}` |
 | 10 | Premier caractère unique | `firstUniqueChar("swiss")` → `'w'` |
+
+---
+
+⬅️ [Sommaire](../../README.fr.md) · [README](../../../README.fr.md)

@@ -10,64 +10,93 @@
 
 🇬🇧 [English version](README.md)
 
-**Un kit tout-en-un, bilingue (EN/FR), pour préparer les entretiens de développeur, centré
-sur Java.** Des algos à coder jusqu'à ce que les tests passent au vert, un livre qui couvre
-tous les sujets demandés en entretien, des notes de system design, des mémos à relire la
-veille, et une roadmap semaine par semaine.
-
-Même esprit que [java-mastery](https://github.com/Anna-2W/java-mastery) et
-[sql-mastery](https://github.com/Anna-2W/sql-mastery) : on apprend en faisant passer des
-tests rouges au vert.
+Se préparer aux entretiens de développeur Java, étape par étape : lire un chapitre, faire
+ses exos jusqu'à ce que les tests passent au vert, passer au suivant.
 
 ---
 
-## 🧭 Contenu
+## 🚀 Par où commencer
 
-| Partie | C'est quoi | Où |
-|---|---|---|
-| 🗺️ **Roadmap** | Plan sur 16 semaines, quoi étudier chaque semaine, combien d'exos | [ROADMAP.fr.md](ROADMAP.fr.md) |
-| 📖 **Le livre** | Chapitres structures de données, algos, Java, system design, OS, réseau, BDD | [book/](book/README.fr.md) |
-| 💻 **Exercices** | Problèmes Java avec des tests JUnit qui démarrent en rouge | [src/main/java](src/main/java/com/mastery/interview) |
-| 🧠 **Mémos** | Fiches d'une page pour la dernière révision avant l'entretien | `memos/` (à venir) |
-| 🏗️ **System design** | Designs classiques (raccourcisseur d'URL, chat, fil d'actu...) avec un plan fixe | `system-design/` (à venir) |
-| ✅ **Suivi** | Chaque sujet en case à cocher, avec une priorité | [PROGRESS.md](PROGRESS.md) |
+```bash
+git clone https://github.com/Anna-2W/interview-prep.git
+cd interview-prep
+mvn -Dtest=StringExercisesTest test
+```
+
+Tous les tests sont rouges au départ. C'est normal : le but est de les faire passer au vert.
 
 ---
 
-## 💻 Comment marchent les exercices
+## 📚 Partie 0 : Les bases
 
-1. **Lire** l'énoncé dans la Javadoc du fichier d'exercice (EN et FR).
-2. **Coder** sa solution à la place de `throw new UnsupportedOperationException("TODO")`.
-3. **Lancer le test** :
-   ```bash
-   mvn -Dtest=TwoSumTest test   # un exercice
-   mvn test                     # tout
+Le tout début : les classes Java qu'on utilise dans chaque entretien, toutes leurs méthodes
+avec un exemple, et 10 exos faciles par chapitre.
+
+| # | Chapitre | Exos | Lancer les tests |
+|---|---|---|---|
+| F01 | String · [FR](book/fr/foundations/01-string.md) · [EN](book/en/foundations/01-string.md) | [StringExercises.java](src/main/java/com/mastery/interview/foundations/StringExercises.java) | `mvn -Dtest=StringExercisesTest test` |
+| F02 | Array · [FR](book/fr/foundations/02-array.md) · [EN](book/en/foundations/02-array.md) | [ArrayExercises.java](src/main/java/com/mastery/interview/foundations/ArrayExercises.java) | `mvn -Dtest=ArrayExercisesTest test` |
+| F03 | List · [FR](book/fr/foundations/03-list.md) · [EN](book/en/foundations/03-list.md) | [ListExercises.java](src/main/java/com/mastery/interview/foundations/ListExercises.java) | `mvn -Dtest=ListExercisesTest test` |
+| F04 | Map · [FR](book/fr/foundations/04-map.md) · [EN](book/en/foundations/04-map.md) | [MapExercises.java](src/main/java/com/mastery/interview/foundations/MapExercises.java) | `mvn -Dtest=MapExercisesTest test` |
+| F05 | Set | à venir | |
+| F06 | Stack et Queue | à venir | |
+
+Chaque chapitre a les mêmes parties :
+
+1. C'est quoi
+2. Comment le créer
+3. Toutes les méthodes, chacune avec un exemple et son résultat
+4. Comment le parcourir
+5. À quoi ça sert en entretien
+6. Les pièges (faux / juste)
+7. Les 10 exos
+
+---
+
+## 💻 Comment faire un exo
+
+1. Ouvrir le fichier d'exos, par exemple `StringExercises.java`.
+2. Chaque méthode a une ligne de commentaire avec des exemples :
+   ```java
+   // E01  lastChar("hello") -> 'o'
+   public static char lastChar(String s) {
+       throw new UnsupportedOperationException("TODO");
+   }
    ```
-4. **Vert ?** ✅ Dire la complexité à voix haute, comme en entretien, puis passer au suivant.
-
-> **La règle :** un test reste rouge tant que le code n'est pas correct ET assez rapide.
-> Certains tests utilisent exprès de grosses entrées, donc une force brute ne passe pas.
+3. Remplacer la ligne `throw` par son code.
+4. Lancer seulement cet exo :
+   ```bash
+   mvn -Dtest='StringExercisesTest$E01LastChar' test
+   ```
+5. Vert ✅ : exo suivant. Rouge ❌ : lire le message d'erreur, il montre la valeur attendue.
 
 Prérequis : JDK 21+ et Maven.
 
 ---
 
-## 🏷️ Priorités
+## 🗂️ Plan du repo
 
-La liste des sujets est énorme. Tout ne vaut pas pareil en entretien :
+```
+interview-prep/
+├── README.fr.md               ← vous êtes ici
+├── ROADMAP.fr.md              plan sur 16 semaines
+├── PROGRESS.md                chaque sujet en case à cocher
+├── book/
+│   ├── README.fr.md           sommaire complet
+│   ├── fr/foundations/        chapitres de la partie 0, en français
+│   └── en/foundations/        chapitres de la partie 0, en anglais
+└── src/
+    ├── main/java/.../foundations/   les exos (on écrit ici)
+    └── test/java/.../foundations/   les tests (ne pas toucher)
+```
 
-- 🔴 **Indispensable** : tombe tout le temps, à résoudre sans aide.
-- 🟠 **Important** : fréquent en mid/senior, à bien connaître.
-- 🟢 **Bonus** : rare, à lire une fois pour ne pas être surpris par le nom.
-
-On commence par les 🔴. Un sujet 🟢 ne passe jamais avant un 🔴 pas fini.
+| Document | C'est quoi |
+|---|---|
+| [Sommaire du livre](book/README.fr.md) | Tous les chapitres, écrits ou prévus |
+| [Roadmap](ROADMAP.fr.md) | Quoi étudier chaque semaine |
+| [Suivi](PROGRESS.md) | Cocher ce qu'on sait, avec les priorités 🔴 🟠 🟢 |
 
 ---
-
-## 📅 Avancement
-
-Ce repo se construit étape par étape. Voir la [ROADMAP](ROADMAP.fr.md) pour le plan complet
-et le [sommaire du livre](book/README.fr.md) pour les chapitres déjà écrits.
 
 ## Licence
 

@@ -167,3 +167,7 @@ mvn -Dtest=ArrayExercisesTest test
 | 08 | Reversed (new array) | `reversed({1, 2, 3})` → `{3, 2, 1}` |
 | 09 | Is sorted | `isSorted({1, 2, 2, 5})` → `true` |
 | 10 | Concat | `concat({1, 2}, {3})` → `{1, 2, 3}` |
+
+---
+
+⬅️ [Table of contents](../../README.md) · [README](../../../README.md)

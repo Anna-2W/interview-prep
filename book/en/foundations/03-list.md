@@ -217,3 +217,7 @@ mvn -Dtest=ListExercisesTest test
 | 08 | Without duplicates | `withoutDuplicates(["a", "b", "a"])` → `["a", "b"]` |
 | 09 | Merge | `merge([1, 2], [3])` → `[1, 2, 3]` |
 | 10 | Sorted copy | `sortedCopy(["c", "a", "b"])` → `["a", "b", "c"]` |
+
+---
+
+⬅️ [Table of contents](../../README.md) · [README](../../../README.md)

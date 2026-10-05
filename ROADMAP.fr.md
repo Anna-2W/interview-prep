@@ -24,9 +24,11 @@ fermer, et refaire le problème 2 jours plus tard. Un exo n'est « fait » que r
 
 ---
 
-## Phase 0 : Point de départ (semaine 0)
+## Phase 0 : Les bases et le point de départ (semaines 0 et 1)
 
-- [ ] Installer le repo, lancer `mvn test`, résoudre l'échauffement `TwoSum`
+- [ ] Installer le repo et lancer `mvn test`
+- [ ] Partie 0, les bases : [String](book/fr/foundations/01-string.md), [Array](book/fr/foundations/02-array.md), [List](book/fr/foundations/03-list.md), [Map](book/fr/foundations/04-map.md), tous les exos au vert
+- [ ] Résoudre l'échauffement `TwoSum`
 - [ ] Résoudre 3 exos faciles chronométrés, noter où ça a bloqué
 - [ ] Écrire son pitch d'une minute « parlez-moi de vous » (chapitre 14 du livre)
 - [ ] Noter son salaire actuel et la fourchette du marché pour son niveau (dans `private/`, jamais commité)

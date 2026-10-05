@@ -7,6 +7,21 @@ complexity**, **the traps** interviewers like, and **the questions** they actual
 
 Status: ✅ written · 🚧 in progress · ⏳ planned
 
+## Part 0: Foundations
+
+All the methods of the classes you use every day, each with an example, and 10 easy exercises.
+
+| # | Chapter | Covers | Status |
+|---|---|---|---|
+| F01 | [String](en/foundations/01-string.md) | `String`, `StringBuilder`, `Character` | ✅ |
+| F02 | [Array](en/foundations/02-array.md) | `int[]`, `Arrays`, `System.arraycopy` | ✅ |
+| F03 | [List](en/foundations/03-list.md) | `List`, `ArrayList`, `LinkedList`, `Iterator`, `Collections` | ✅ |
+| F04 | [Map](en/foundations/04-map.md) | `Map`, `HashMap`, `TreeMap`, `LinkedHashMap`, `Map.Entry` | ✅ |
+| F05 | Set | `Set`, `HashSet`, `TreeSet`, `LinkedHashSet` | ⏳ |
+| F06 | Stack and Queue | `Deque`, `ArrayDeque`, `PriorityQueue` | ⏳ |
+
+## Part 1: Interview topics
+
 | # | Chapter | Covers | Status |
 |---|---|---|---|
 | 00 | [How tech interviews work](en/00-how-interviews-work.md) | Interview loop, the 6-step method, levels and salary | ✅ |
@@ -26,3 +41,5 @@ Status: ✅ written · 🚧 in progress · ⏳ planned
 | 14 | Behavioral and negotiation | Pitch, STAR stories, questions to ask, offer negotiation | ⏳ |
 
 Chapters live in [`en/`](en/) and [`fr/`](fr/), with the same file names.
+
+⬅️ [Back to the README](../README.md)

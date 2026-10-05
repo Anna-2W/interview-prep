@@ -10,63 +10,93 @@
 
 🇫🇷 [Version française](README.fr.md)
 
-**An all-in-one, bilingual (EN/FR) preparation kit for software engineering interviews,
-with a Java focus.** Algorithms you code until the tests are green, a book that covers every
-topic interviewers ask about, system design notes, memos to review the night before, and a
-week-by-week roadmap.
-
-Same spirit as [java-mastery](https://github.com/Anna-2W/java-mastery) and
-[sql-mastery](https://github.com/Anna-2W/sql-mastery): you learn by making failing tests pass.
+Prepare for Java developer interviews, step by step: read a chapter, solve its exercises
+until the tests are green, move to the next one.
 
 ---
 
-## 🧭 What is inside
+## 🚀 Start here
 
-| Part | What it is | Where |
-|---|---|---|
-| 🗺️ **Roadmap** | 16-week plan, what to study each week, how many problems | [ROADMAP.md](ROADMAP.md) |
-| 📖 **The book** | Chapters on DS, algorithms, Java, system design, OS, networking, databases | [book/](book/README.md) |
-| 💻 **Exercises** | Java problems with JUnit tests that start red | [src/main/java](src/main/java/com/mastery/interview) |
-| 🧠 **Memos** | One-page cheat sheets for the last review before an interview | `memos/` (coming) |
-| 🏗️ **System design** | Classic designs (URL shortener, chat, feed...) with a fixed template | `system-design/` (coming) |
-| ✅ **Progress tracker** | Every topic as a checkbox, with a priority tag | [PROGRESS.md](PROGRESS.md) |
+```bash
+git clone https://github.com/Anna-2W/interview-prep.git
+cd interview-prep
+mvn -Dtest=StringExercisesTest test
+```
+
+Every test is red at the start. That is normal: your job is to make them green.
 
 ---
 
-## 💻 How the exercises work
+## 📚 Part 0: Foundations
 
-1. **Read** the problem in the Javadoc of the exercise file (EN and FR).
-2. **Code** your solution in place of `throw new UnsupportedOperationException("TODO")`.
-3. **Run the test**:
-   ```bash
-   mvn -Dtest=TwoSumTest test   # one exercise
-   mvn test                     # everything
+The very beginning: the Java classes you use in every interview, all their methods with an
+example, and 10 easy exercises per chapter.
+
+| # | Chapter | Exercises | Run the tests |
+|---|---|---|---|
+| F01 | String · [EN](book/en/foundations/01-string.md) · [FR](book/fr/foundations/01-string.md) | [StringExercises.java](src/main/java/com/mastery/interview/foundations/StringExercises.java) | `mvn -Dtest=StringExercisesTest test` |
+| F02 | Array · [EN](book/en/foundations/02-array.md) · [FR](book/fr/foundations/02-array.md) | [ArrayExercises.java](src/main/java/com/mastery/interview/foundations/ArrayExercises.java) | `mvn -Dtest=ArrayExercisesTest test` |
+| F03 | List · [EN](book/en/foundations/03-list.md) · [FR](book/fr/foundations/03-list.md) | [ListExercises.java](src/main/java/com/mastery/interview/foundations/ListExercises.java) | `mvn -Dtest=ListExercisesTest test` |
+| F04 | Map · [EN](book/en/foundations/04-map.md) · [FR](book/fr/foundations/04-map.md) | [MapExercises.java](src/main/java/com/mastery/interview/foundations/MapExercises.java) | `mvn -Dtest=MapExercisesTest test` |
+| F05 | Set | coming | |
+| F06 | Stack and Queue | coming | |
+
+Every chapter has the same sections:
+
+1. What it is
+2. How to create it
+3. All the methods, each with an example and its result
+4. How to go through it
+5. What it is used for in interviews
+6. The traps (wrong / right)
+7. The 10 exercises
+
+---
+
+## 💻 How to do an exercise
+
+1. Open the exercise file, for example `StringExercises.java`.
+2. Each method has one comment line with examples:
+   ```java
+   // E01  lastChar("hello") -> 'o'
+   public static char lastChar(String s) {
+       throw new UnsupportedOperationException("TODO");
+   }
    ```
-4. **Green?** ✅ Say the complexity out loud, as you would in the interview, then move on.
-
-> **The rule:** a test is red until your code is correct AND fast enough. Some tests use
-> large inputs on purpose, so a brute force solution times out.
+3. Replace the `throw` line with your code.
+4. Run only this exercise:
+   ```bash
+   mvn -Dtest='StringExercisesTest$E01LastChar' test
+   ```
+5. Green ✅: go to the next one. Red ❌: read the error message, it shows the expected value.
 
 Requirements: JDK 21+ and Maven.
 
 ---
 
-## 🏷️ Priority tags
+## 🗂️ Repository map
 
-The topic list is huge. Not everything is worth the same in an interview:
+```
+interview-prep/
+├── README.md                  ← you are here
+├── ROADMAP.md                 16-week plan
+├── PROGRESS.md                every topic as a checkbox
+├── book/
+│   ├── README.md              full table of contents
+│   ├── en/foundations/        Part 0 chapters, English
+│   └── fr/foundations/        Part 0 chapters, French
+└── src/
+    ├── main/java/.../foundations/   exercises (you write here)
+    └── test/java/.../foundations/   tests (do not touch)
+```
 
-- 🔴 **Must**: asked all the time, you must solve it without help.
-- 🟠 **Should**: asked often at mid/senior level, know it well.
-- 🟢 **Nice**: rare, read it once so the name does not surprise you.
-
-Study the 🔴 first. A 🟢 topic never comes before an unfinished 🔴 one.
+| Document | What it is |
+|---|---|
+| [Book table of contents](book/README.md) | Every chapter, written or planned |
+| [Roadmap](ROADMAP.md) | What to study each week |
+| [Progress](PROGRESS.md) | Tick what you know, with priorities 🔴 🟠 🟢 |
 
 ---
-
-## 📅 Status
-
-This repo is built step by step. See the [ROADMAP](ROADMAP.md) for the full plan and the
-[book outline](book/README.md) for which chapters are written.
 
 ## License
 

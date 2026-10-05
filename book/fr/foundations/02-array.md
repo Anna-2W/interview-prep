@@ -168,3 +168,7 @@ mvn -Dtest=ArrayExercisesTest test
 | 08 | Inversé (nouveau tableau) | `reversed({1, 2, 3})` → `{3, 2, 1}` |
 | 09 | Est trié | `isSorted({1, 2, 2, 5})` → `true` |
 | 10 | Concaténer | `concat({1, 2}, {3})` → `{1, 2, 3}` |
+
+---
+
+⬅️ [Sommaire](../../README.fr.md) · [README](../../../README.fr.md)

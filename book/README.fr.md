@@ -7,6 +7,21 @@ complexité**, **les pièges** que les recruteurs adorent, et **les questions** 
 
 État : ✅ écrit · 🚧 en cours · ⏳ prévu
 
+## Partie 0 : Les bases
+
+Toutes les méthodes des classes qu'on utilise tous les jours, chacune avec un exemple, et 10 exos faciles.
+
+| # | Chapitre | Contenu | État |
+|---|---|---|---|
+| F01 | [String](fr/foundations/01-string.md) | `String`, `StringBuilder`, `Character` | ✅ |
+| F02 | [Array](fr/foundations/02-array.md) | `int[]`, `Arrays`, `System.arraycopy` | ✅ |
+| F03 | [List](fr/foundations/03-list.md) | `List`, `ArrayList`, `LinkedList`, `Iterator`, `Collections` | ✅ |
+| F04 | [Map](fr/foundations/04-map.md) | `Map`, `HashMap`, `TreeMap`, `LinkedHashMap`, `Map.Entry` | ✅ |
+| F05 | Set | `Set`, `HashSet`, `TreeSet`, `LinkedHashSet` | ⏳ |
+| F06 | Stack et Queue | `Deque`, `ArrayDeque`, `PriorityQueue` | ⏳ |
+
+## Partie 1 : Les sujets d'entretien
+
 | # | Chapitre | Contenu | État |
 |---|---|---|---|
 | 00 | [Comment se passe un entretien tech](fr/00-how-interviews-work.md) | Les étapes, la méthode en 6 étapes, niveaux et salaire | ✅ |
@@ -26,3 +41,5 @@ complexité**, **les pièges** que les recruteurs adorent, et **les questions** 
 | 14 | Comportemental et négociation | Pitch, histoires STAR, questions à poser, négociation de l'offre | ⏳ |
 
 Les chapitres sont dans [`en/`](en/) et [`fr/`](fr/), avec les mêmes noms de fichiers.
+
+⬅️ [Retour au README](../README.fr.md)
