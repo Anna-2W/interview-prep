@@ -35,7 +35,28 @@ c'est de lire l'énoncé et de reconnaître lequel s'applique. Chaque pattern ci
 
 ---
 
+## Comment apprendre un pattern (à faire pour chacun)
+
+Lire un modèle de code ne suffit pas : il faut **le voir tourner** et **le reconstruire seule**.
+
+| Étape | Ce que tu fais | Temps |
+|---|---|---|
+| 1. Comprendre le problème | Lire les sections 1 et 2 de la leçon détaillée : pourquoi la force brute est lente, ce que l'astuce change | 10 min |
+| 2. Dérouler à la main | Prendre une feuille, recopier l'exemple de la section 3 et remplir le tableau **toi-même**, ligne par ligne, avant de regarder la réponse | 15 min |
+| 3. Comprendre chaque ligne | Lire le modèle ligne par ligne (section 4). Pour chaque ligne, se demander : « qu'est-ce qui casse si je l'enlève ? » | 10 min |
+| 4. Réécrire de mémoire | Fermer la leçon, écrire le modèle de mémoire dans un fichier vide, comparer | 10 min |
+| 5. Faire les exos | Dans l'ordre, à partir de E01. Avant de coder, écrire sur papier ce que tu stockes et ce que représente chaque pointeur | 1 à 2 h |
+| 6. Expliquer à voix haute | Expliquer une solution comme en entretien : idée, complexité, pourquoi c'est correct | 5 min |
+| 7. Refaire 2 jours après | Refaire l'exo le plus dur de zéro, sans regarder | 20 min |
+
+**Bloquée plus de 25 minutes ?** Reviens à la trace (étape 2) sur une entrée plus petite. La
+plupart des bugs apparaissent quand on suit les variables à la main.
+
+---
+
 ## 1. Hachage
+
+📖 **Leçon détaillée, pas à pas** : [patterns/01-hashing.md](patterns/01-hashing.md)
 
 **Reconnaître** : « est-ce que je l'ai déjà vu ? », « compter », « regrouper », « paire »
 dans une entrée **non triée**.
@@ -73,6 +94,8 @@ for (int i = 0; i < nums.length; i++) {
 ---
 
 ## 2. Deux pointeurs
+
+📖 **Leçon détaillée, pas à pas** : [patterns/02-two-pointers.md](patterns/02-two-pointers.md)
 
 **Reconnaître** : tableau **trié**, trouver une paire, inverser ou comparer les deux bouts,
 modifier un tableau **en place**.
@@ -122,6 +145,8 @@ for (int read = 0; read < nums.length; read++) {
 
 ## 3. Fenêtre glissante
 
+📖 **Leçon détaillée, pas à pas** : [patterns/03-sliding-window.md](patterns/03-sliding-window.md)
+
 **Reconnaître** : « sous-tableau / sous-chaîne **contigu** », « le plus long / le plus
 court », « de taille k », « au plus k... ».
 
@@ -163,6 +188,8 @@ for (int right = 0; right < s.length(); right++) {
 ---
 
 ## 4. Sommes préfixes
+
+📖 **Leçon détaillée, pas à pas** : [patterns/04-prefix-sums.md](patterns/04-prefix-sums.md)
 
 **Reconnaître** : « somme entre i et j », beaucoup de requêtes sur des intervalles,
 « nombre de sous-tableaux de somme k », « point d'équilibre ».
@@ -207,6 +234,8 @@ for (int x : nums) {
 
 ## 5. Pointeurs lent et rapide
 
+📖 **Leçon détaillée, pas à pas** : [patterns/05-fast-slow-pointers.md](patterns/05-fast-slow-pointers.md)
+
 **Reconnaître** : liste chaînée, « cycle », « milieu », « n-ième depuis la fin ».
 
 **Idée** : `slow` avance d'un pas, `fast` de deux. Quand `fast` arrive au bout, `slow` est
@@ -229,6 +258,8 @@ return slow;
 ---
 
 ## 6. Recherche dichotomique
+
+📖 **Leçon détaillée, pas à pas** : [patterns/06-binary-search.md](patterns/06-binary-search.md)
 
 **Reconnaître** : tableau trié, « en O(log n) », « la valeur minimale telle que... », « la
 première position où... ».
@@ -291,6 +322,8 @@ return lo;
 
 ## 7. Pile monotone
 
+📖 **Leçon détaillée, pas à pas** : [patterns/07-monotonic-stack.md](patterns/07-monotonic-stack.md)
+
 **Reconnaître** : « prochain élément plus grand », « prochain plus petit », « combien de
 jours avant qu'il fasse plus chaud ».
 
@@ -322,6 +355,8 @@ for (int i = 0; i < nums.length; i++) {
 ---
 
 ## 8. Intervalles
+
+📖 **Leçon détaillée, pas à pas** : [patterns/08-intervals.md](patterns/08-intervals.md)
 
 **Reconnaître** : des paires `[début, fin]`, réunions, réservations, « chevauchement »,
 « fusionner ».
@@ -356,6 +391,8 @@ for (int[] current : intervals) {
 
 ## 9. Tas (top K, fusion de K listes, deux tas)
 
+📖 **Leçon détaillée, pas à pas** : [patterns/09-heap.md](patterns/09-heap.md)
+
 **Reconnaître** : « les k plus grands / petits / fréquents / proches », « fusionner k
 listes triées », « médiane d'un flux ».
 
@@ -388,6 +425,8 @@ for (int x : nums) {
 
 ## 10. Manipulation de bits
 
+📖 **Leçon détaillée, pas à pas** : [patterns/10-bits.md](patterns/10-bits.md)
+
 **Reconnaître** : « sans espace en plus », « apparaît une fois alors que les autres
 apparaissent deux fois », puissances de 2, « compter les bits à 1 ».
 
@@ -412,6 +451,8 @@ apparaissent deux fois », puissances de 2, « compter les bits à 1 ».
 ---
 
 ## 11. Backtracking
+
+📖 **Leçon détaillée, pas à pas** : [patterns/11-backtracking.md](patterns/11-backtracking.md)
 
 **Reconnaître** : « toutes les combinaisons », « tous les sous-ensembles », « toutes les
 permutations », « toutes les solutions valides... ».

@@ -34,7 +34,28 @@ statement and recognize which one applies. Each pattern below has: **how to reco
 
 ---
 
+## How to learn a pattern (do this for each one)
+
+Reading a template is not enough: you must **see it run** and **rebuild it alone**.
+
+| Step | What you do | Time |
+|---|---|---|
+| 1. Understand the problem | Read sections 1 and 2 of the detailed lesson: why the brute force is slow, what the trick changes | 10 min |
+| 2. Trace by hand | Take a sheet of paper, copy the example of section 3, and fill the table **yourself**, line by line, before looking at the answer | 15 min |
+| 3. Understand each line | Read the template line by line (section 4). For each line, ask: "what breaks if I remove it?" | 10 min |
+| 4. Rewrite from memory | Close the lesson, write the template from memory in an empty file, compare | 10 min |
+| 5. Solve the exercises | In order, from E01. Before coding, write on paper what you store and what each pointer means | 1 to 2 h |
+| 6. Explain out loud | Explain one solution as in an interview: idea, complexity, why it is correct | 5 min |
+| 7. Redo 2 days later | Redo the hardest exercise from scratch, without looking | 20 min |
+
+**Stuck for more than 25 minutes?** Go back to the trace (step 2) on a smaller input. Most
+bugs show up when you follow the variables by hand.
+
+---
+
 ## 1. Hashing
+
+📖 **Detailed lesson, step by step**: [patterns/01-hashing.md](patterns/01-hashing.md)
 
 **Recognize**: "have I already seen it?", "count", "group", "pair" in an **unsorted** input.
 
@@ -71,6 +92,8 @@ for (int i = 0; i < nums.length; i++) {
 ---
 
 ## 2. Two pointers
+
+📖 **Detailed lesson, step by step**: [patterns/02-two-pointers.md](patterns/02-two-pointers.md)
 
 **Recognize**: **sorted** array, find a pair, reverse or compare both ends, change an array
 **in place**.
@@ -120,6 +143,8 @@ for (int read = 0; read < nums.length; read++) {
 
 ## 3. Sliding window
 
+📖 **Detailed lesson, step by step**: [patterns/03-sliding-window.md](patterns/03-sliding-window.md)
+
 **Recognize**: "**contiguous** subarray / substring", "longest / shortest", "of size k",
 "at most k...".
 
@@ -160,6 +185,8 @@ for (int right = 0; right < s.length(); right++) {
 ---
 
 ## 4. Prefix sums
+
+📖 **Detailed lesson, step by step**: [patterns/04-prefix-sums.md](patterns/04-prefix-sums.md)
 
 **Recognize**: "sum between i and j", many range queries, "number of subarrays with sum k",
 "balance point".
@@ -203,6 +230,8 @@ for (int x : nums) {
 
 ## 5. Fast and slow pointers
 
+📖 **Detailed lesson, step by step**: [patterns/05-fast-slow-pointers.md](patterns/05-fast-slow-pointers.md)
+
 **Recognize**: linked list, "cycle", "middle", "n-th from the end".
 
 **Idea**: `slow` moves 1 step, `fast` moves 2. When `fast` reaches the end, `slow` is in the
@@ -225,6 +254,8 @@ return slow;
 ---
 
 ## 6. Binary search
+
+📖 **Detailed lesson, step by step**: [patterns/06-binary-search.md](patterns/06-binary-search.md)
 
 **Recognize**: sorted array, "in O(log n)", "the minimum value such that...", "the first
 position where...".
@@ -286,6 +317,8 @@ return lo;
 
 ## 7. Monotonic stack
 
+📖 **Detailed lesson, step by step**: [patterns/07-monotonic-stack.md](patterns/07-monotonic-stack.md)
+
 **Recognize**: "next greater element", "next smaller", "how many days until warmer",
 "span".
 
@@ -316,6 +349,8 @@ for (int i = 0; i < nums.length; i++) {
 ---
 
 ## 8. Intervals
+
+📖 **Detailed lesson, step by step**: [patterns/08-intervals.md](patterns/08-intervals.md)
 
 **Recognize**: pairs `[start, end]`, meetings, bookings, "overlap", "merge".
 
@@ -349,6 +384,8 @@ for (int[] current : intervals) {
 
 ## 9. Heap (top K, k-way merge, two heaps)
 
+📖 **Detailed lesson, step by step**: [patterns/09-heap.md](patterns/09-heap.md)
+
 **Recognize**: "the k biggest / smallest / most frequent / closest", "merge k sorted lists",
 "median of a stream".
 
@@ -381,6 +418,8 @@ for (int x : nums) {
 
 ## 10. Bit manipulation
 
+📖 **Detailed lesson, step by step**: [patterns/10-bits.md](patterns/10-bits.md)
+
 **Recognize**: "without extra space", "appears once while others appear twice", powers of 2,
 "count the 1 bits".
 
@@ -405,6 +444,8 @@ for (int x : nums) {
 ---
 
 ## 11. Backtracking
+
+📖 **Detailed lesson, step by step**: [patterns/11-backtracking.md](patterns/11-backtracking.md)
 
 **Recognize**: "all combinations", "all subsets", "all permutations", "every valid...".
 
