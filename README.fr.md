@@ -41,7 +41,18 @@ avec un exemple, et 10 exos faciles par chapitre.
 | F05 | Set · [FR](book/fr/foundations/05-set.md) · [EN](book/en/foundations/05-set.md) | [SetExercises.java](src/main/java/com/mastery/interview/foundations/SetExercises.java) | `mvn -Dtest=SetExercisesTest test` |
 | F06 | Stack et Queue · [FR](book/fr/foundations/06-stack-queue.md) · [EN](book/en/foundations/06-stack-queue.md) | [StackQueueExercises.java](src/main/java/com/mastery/interview/foundations/StackQueueExercises.java) | `mvn -Dtest=StackQueueExercisesTest test` |
 
-Chaque chapitre a les mêmes parties :
+## 🧠 Partie 1 : Les sujets d'entretien
+
+| # | Chapitre | Exos | Lancer les tests |
+|---|---|---|---|
+| 01 | Complexité (Big O) · [FR](book/fr/01-complexity.md) · [EN](book/en/01-complexity.md) | [ComplexityQuiz.java](src/main/java/com/mastery/interview/complexity/ComplexityQuiz.java) · [FasterExercises.java](src/main/java/com/mastery/interview/complexity/FasterExercises.java) | `mvn -Dtest=ComplexityQuizTest test` · `mvn -Dtest=FasterExercisesTest test` |
+| 02 | Structures de données codées à la main | à venir | |
+
+La liste complète des chapitres est dans le [sommaire du livre](book/README.fr.md).
+
+---
+
+Chaque chapitre de la partie 0 a les mêmes parties :
 
 1. C'est quoi
 2. Comment le créer
@@ -83,11 +94,13 @@ interview-prep/
 ├── PROGRESS.md                chaque sujet en case à cocher
 ├── book/
 │   ├── README.fr.md           sommaire complet
+│   ├── fr/                    chapitres de la partie 1, en français (01-complexity.md...)
 │   ├── fr/foundations/        chapitres de la partie 0, en français
+│   ├── en/                    chapitres de la partie 1, en anglais
 │   └── en/foundations/        chapitres de la partie 0, en anglais
 └── src/
-    ├── main/java/.../foundations/   les exos (on écrit ici)
-    └── test/java/.../foundations/   les tests (ne pas toucher)
+    ├── main/java/.../         les exos, un package par chapitre (on écrit ici)
+    └── test/java/.../         les tests (ne pas toucher)
 ```
 
 | Document | C'est quoi |

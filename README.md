@@ -41,7 +41,18 @@ example, and 10 easy exercises per chapter.
 | F05 | Set · [EN](book/en/foundations/05-set.md) · [FR](book/fr/foundations/05-set.md) | [SetExercises.java](src/main/java/com/mastery/interview/foundations/SetExercises.java) | `mvn -Dtest=SetExercisesTest test` |
 | F06 | Stack and Queue · [EN](book/en/foundations/06-stack-queue.md) · [FR](book/fr/foundations/06-stack-queue.md) | [StackQueueExercises.java](src/main/java/com/mastery/interview/foundations/StackQueueExercises.java) | `mvn -Dtest=StackQueueExercisesTest test` |
 
-Every chapter has the same sections:
+## 🧠 Part 1: Interview topics
+
+| # | Chapter | Exercises | Run the tests |
+|---|---|---|---|
+| 01 | Complexity (Big O) · [EN](book/en/01-complexity.md) · [FR](book/fr/01-complexity.md) | [ComplexityQuiz.java](src/main/java/com/mastery/interview/complexity/ComplexityQuiz.java) · [FasterExercises.java](src/main/java/com/mastery/interview/complexity/FasterExercises.java) | `mvn -Dtest=ComplexityQuizTest test` · `mvn -Dtest=FasterExercisesTest test` |
+| 02 | Data structures coded by hand | coming | |
+
+The full list of chapters is in the [book table of contents](book/README.md).
+
+---
+
+Every Part 0 chapter has the same sections:
 
 1. What it is
 2. How to create it
@@ -83,11 +94,13 @@ interview-prep/
 ├── PROGRESS.md                every topic as a checkbox
 ├── book/
 │   ├── README.md              full table of contents
+│   ├── en/                    Part 1 chapters, English (01-complexity.md...)
 │   ├── en/foundations/        Part 0 chapters, English
+│   ├── fr/                    Part 1 chapters, French
 │   └── fr/foundations/        Part 0 chapters, French
 └── src/
-    ├── main/java/.../foundations/   exercises (you write here)
-    └── test/java/.../foundations/   tests (do not touch)
+    ├── main/java/.../         exercises, one package per chapter (you write here)
+    └── test/java/.../         tests (do not touch)
 ```
 
 | Document | What it is |
