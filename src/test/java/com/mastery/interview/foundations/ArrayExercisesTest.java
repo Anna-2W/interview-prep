@@ -36,7 +36,6 @@ class ArrayExercisesTest {
 
         @Test
         void allNegatives() {
-            // starting from 0 instead of nums[0] gives 0 here: wrong
             assertThat(max(new int[] {-5, -2, -8})).isEqualTo(-2);
         }
 

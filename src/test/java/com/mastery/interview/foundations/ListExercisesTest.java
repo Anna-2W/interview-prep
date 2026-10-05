@@ -82,7 +82,6 @@ class ListExercisesTest {
 
         @Test
         void removesTheValueNotTheIndex() {
-            // list.remove(0) would remove the 5 at index 0: wrong
             List<Integer> list = new ArrayList<>(List.of(5, 0, 7));
             removeValue(list, 0);
             assertThat(list).containsExactly(5, 7);
@@ -100,7 +99,6 @@ class ListExercisesTest {
     class E06CountLongWords {
         @Test
         void strictlyLonger() {
-            // "hey" has length 3: not strictly longer than 3
             assertThat(countLongWords(List.of("hi", "hello", "hey"), 3)).isEqualTo(1);
         }
 

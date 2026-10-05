@@ -61,7 +61,6 @@ class StringExercisesTest {
 
         @Test
         void comparesContentNotReference() {
-            // two different objects with the same text: == would say false
             assertThat(sameText(new String("hi"), new String("hi"))).isTrue();
         }
     }

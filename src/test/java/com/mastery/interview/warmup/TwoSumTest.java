@@ -20,7 +20,6 @@ class TwoSumTest {
 
     @Test
     void doesNotReuseTheSameElement() {
-        // 3 + 3 = 6 must use two different indices, not index 0 twice
         assertThat(TwoSum.twoSum(new int[] {3, 3}, 6)).containsExactly(0, 1);
     }
 
@@ -37,7 +36,6 @@ class TwoSumTest {
         for (int i = 0; i < n; i++) {
             nums[i] = i;
         }
-        // An O(n^2) double loop needs ~500 billion steps here: it fails on the timeout
         assertThat(TwoSum.twoSum(nums, 2 * n - 3)).containsExactly(n - 2, n - 1);
     }
 }
