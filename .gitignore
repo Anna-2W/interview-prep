@@ -1,0 +1,10 @@
+target/
+*.class
+.idea/
+*.iml
+.vscode/
+.DS_Store
+*.log
+
+# Personal notes (real company names, salaries, recruiters) stay local
+private/
